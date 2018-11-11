@@ -3,114 +3,161 @@
     <header class="header-area">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <!--<div class="center-me-when-desktop">-->
-          <router-link
-            :to="{ name: 'home.index' }"
-            class="navbar-brand"
-          >
-            <img src="../assets/logo/logo_rural_holidays.png" alt="" class="big-logo">
-            <img src="../assets/logo/logo_transparent_orange.png" alt="" class="small-logo">
+        <router-link
+          :to="{ name: 'home.index' }"
+          class="navbar-brand"
+        >
+          <img
+            src="../assets/logo/logo_rural_holidays.png"
+            alt=""
+            class="big-logo">
+          <img
+            src="../assets/logo/logo_transparent_orange.png"
+            alt=""
+            class="small-logo">
 
-          </router-link>
+        </router-link>
 
-          <button
-            class="navbar-toggler"
-            type="button"
-            @click="toggleMenu">
-            <span class="navbar-toggler-icon"/>
-          </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          @click="toggleMenu">
+          <span class="navbar-toggler-icon"/>
+        </button>
 
-          <div
-            :class="{ show : menuCollapsed}"
-            class="collapse navbar-collapse"
+        <div
+          :class="{ show : menuCollapsed}"
+          class="collapse navbar-collapse"
 
-          >
-            <ul class="navbar-nav">
-              <router-link
-                :to="{ name: 'home.index' }"
-                active-class="active"
-                class="nav-item"
-                tag="li"
-                exact
-              >
-                <a class="nav-link">
-                  Home
-                </a>
-              </router-link>
-
-              <li class="nav-item dropdown" active-class="active">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                  NZ Farmstays
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Our Listings</a>
-                  <a class="dropdown-item" href="#">Booking Conditions</a>
-                  <a class="dropdown-item" href="#">Reservation & Booking Info</a>
-                  <a class="dropdown-item" href="#">Booking Form</a>
-                  <a class="dropdown-item" href="#">Pricing</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Guest Response</a>
-                </div>
-              </li>
-
-              <li class="nav-item dropdown" active-class="active">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                  Group Tour
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">North Island</a>
-                  <a class="dropdown-item" href="#">South Island</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Technical & Special Interest</a>
-                </div>
-              </li>
-
-              <li class="nav-item dropdown" :class="{ 'active': isAboutUsActive }">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false">
-                  About Us
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#/about-us">Our Story</a>
-                  <a class="dropdown-item" href="#">Become a host</a>
-                  <a class="dropdown-item" href="#">Terms & Conditons</a>
-                  <a class="dropdown-item" href="#">Trade Info</a>
-                </div>
-              </li>
-
-              <router-link
-                :to="{ name: 'contact.index' }"
-                active-class="active"
-                class="nav-item"
-                tag="li"
-                exact
-              >
-                <a class="nav-link">
-                  Contact Us
-                </a>
-              </router-link>
-            </ul>
-            <div class="menu-btn">
-              <a href="#" class="btn rh-btn">Booking Request</a>
-            </div>
-            <!--search bar-->
-            <!--<form class="form-inline my-1 my-sm-0">-->
-            <!--<input class="search mr-sm-1 " type="search" placeholder="Search" aria-label="Search">-->
-            <!--<button class="icon-white btn my-2 my-sm-0 " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>-->
-            <!--</form>-->
-            <!--search bar-->
-            <!-- <span class="navbar-text">
-              <a
-                class="btn btn-secondary"
-                href="#"
-                @click.prevent="logout"
-              >
-                <i class="fa fa-sign-out"/>
+        >
+          <ul class="navbar-nav">
+            <router-link
+              :to="{ name: 'home.index' }"
+              active-class="active"
+              class="nav-item"
+              tag="li"
+              exact
+            >
+              <a class="nav-link">
+                Home
               </a>
-            </span> -->
+            </router-link>
+
+            <li
+              class="nav-item dropdown"
+              active-class="active">
+              <a
+                id="navbarDropdown"
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+                NZ Farmstays
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdown">
+                <a
+                  class="dropdown-item"
+                  href="#">Our Listings</a>
+                <a
+                  class="dropdown-item"
+                  href="#">Booking Conditions</a>
+                <a
+                  class="dropdown-item"
+                  href="#">Reservation & Booking Info</a>
+                <a
+                  class="dropdown-item"
+                  href="#">Booking Form</a>
+                <a
+                  class="dropdown-item"
+                  href="#">Pricing</a>
+                <div class="dropdown-divider"/>
+                <a
+                  class="dropdown-item"
+                  href="#">Guest Response</a>
+              </div>
+            </li>
+
+            <li
+              class="nav-item dropdown"
+              active-class="active">
+              <a
+                id="navbarDropdown"
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+                Group Tour
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdown">
+                <a
+                  class="dropdown-item"
+                  href="#">North Island</a>
+                <a
+                  class="dropdown-item"
+                  href="#">South Island</a>
+                <div class="dropdown-divider"/>
+                <a
+                  class="dropdown-item"
+                  href="#">Technical & Special Interest</a>
+              </div>
+            </li>
+
+            <li
+              :class="{ 'active': isAboutUsActive }"
+              class="nav-item dropdown">
+              <a
+                id="navbarDropdown"
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false">
+                About Us
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdown">
+                <a
+                  class="dropdown-item"
+                  href="#/about-us">Our Story</a>
+                <a
+                  class="dropdown-item"
+                  href="#">Become a host</a>
+                <a
+                  class="dropdown-item"
+                  href="#">Terms & Conditons</a>
+                <a
+                  class="dropdown-item"
+                  href="#">Trade Info</a>
+              </div>
+            </li>
+
+            <router-link
+              :to="{ name: 'contact.index' }"
+              active-class="active"
+              class="nav-item"
+              tag="li"
+              exact
+            >
+              <a class="nav-link">
+                Contact Us
+              </a>
+            </router-link>
+          </ul>
+          <div class="menu-btn">
+            <a
+              href="#"
+              class="btn rh-btn">Booking Request</a>
           </div>
-        <!--</div>-->
+        </div>
 
 
       </nav>
@@ -167,8 +214,12 @@
               <h5><span class="footer-link-arrow">Contact Us</span></h5>
             </router-link>
             <p>Give feedback or request queries to Rural Holidays</p>
-            <a href="tel:+6433556218" class="footer-link-arrow">(03) 355 6218</a><br/>
-            <a href="mailto:Stay@RuralHolidays.co.nz" class="footer-link-arrow">Stay@RuralHolidays.co.nz</a>
+            <a
+              href="tel:+6433556218"
+              class="footer-link-arrow">(03) 355 6218</a><br>
+            <a
+              href="mailto:Stay@RuralHolidays.co.nz"
+              class="footer-link-arrow">Stay@RuralHolidays.co.nz</a>
           </div>
           <!-- Grid column -->
 
@@ -177,10 +228,17 @@
           <!-- Grid column -->
           <div class="col-md-3 mb-md-0 mb-3">
             <h5>Partners</h5>
-            <a href="https://tia.org.nz/" target="_blank" title="Opens in new window. " class="external-link">Tourism
-              Industry Aotearoa</a><br/>
-            <a href="https://www.tourismexportcouncil.org.nz/" target="_blank" title="Opens in new window. "
-               class="external-link">Tourism Export Council</a><br/>
+            <a
+              href="https://tia.org.nz/"
+              target="_blank"
+              title="Opens in new window. "
+              class="external-link">Tourism
+              Industry Aotearoa</a><br>
+            <a
+              href="https://www.tourismexportcouncil.org.nz/"
+              target="_blank"
+              title="Opens in new window. "
+              class="external-link">Tourism Export Council</a><br>
           </div>
           <!-- Grid column -->
 
@@ -198,14 +256,14 @@
 
     </footer>
     <!-- Footer -->
-    <div class="footer-pattern header-area"></div>
+    <div class="footer-pattern header-area"/>
 
   </div>
 
 </template>
 
 <script>
-  /* ============
+/* ============
    * Default Layout
    * ============
    *
@@ -215,47 +273,47 @@
    * This way the app stays clean.
    */
 
-  export default {
-    /**
+export default {
+  /**
      * The name of the layout.
      */
-    name: 'DefaultLayout',
+  name: 'DefaultLayout',
 
-    /**
+  /**
      * The data that can be used by the page.
      *
      * @returns {Object} The view-model data.
      */
-    data() {
-      return {
-        menuCollapsed: false,
-      };
+  data() {
+    return {
+      menuCollapsed: false,
+    };
+  },
+  computed: {
+    isAboutUsActive() {
+      return this.$route.name === 'aboutus.index';
+    },
+  },
+
+  /**
+     * The methods that the layout can use.
+     */
+  methods: {
+    /**
+       * Will log the user out.
+       */
+    logout() {
+      this.$store.dispatch('auth/logout');
     },
 
     /**
-     * The methods that the layout can use.
-     */
-    methods: {
-      /**
-       * Will log the user out.
-       */
-      logout() {
-        this.$store.dispatch('auth/logout');
-      },
-
-      /**
        * Will toggle the menu.
        */
-      toggleMenu() {
-        this.menuCollapsed = !this.menuCollapsed;
-      },
+    toggleMenu() {
+      this.menuCollapsed = !this.menuCollapsed;
     },
-    computed: {
-      isAboutUsActive() {
-        return this.$route.name === 'aboutus.index';
-      }
-    },
-  };
+  },
+};
 </script>
 
 <style scoped>
@@ -380,7 +438,7 @@
     background-color: #EE6123 !important;
   }
 
-  .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+  .navbar-dark .navbar-nav .active>.nav-link {
     color: #fff;
     background-color: #EE6123 !important;
   }
@@ -388,10 +446,6 @@
   .nav-item:hover, .nav-item:active {
     background: #EE6123 !important;
     color: white !important;
-  }
-
-  .icon-white, .icon-white a {
-    color: #fff;
   }
 
   .page-footer {
