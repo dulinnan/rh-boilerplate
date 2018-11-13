@@ -1,9 +1,9 @@
 {
-  "name": "SENG365-Auction-Site-API",
+  "name": "Rural-Holidays-API",
   "version": "0.0.1",
   "scripts": {
-    "start": "node server.js",
-    "test": "./node_modules/.bin/mocha"
+    "start": "node server.js | bunyan",
+    "test": "./node_modules/.bin/mocha ./test/test*.js --reporter spec --log-level=warn"
   },
   "dependencies": {
     "body-parser": "^1.18.2",

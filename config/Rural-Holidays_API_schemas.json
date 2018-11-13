@@ -2,26 +2,26 @@
   "openapi": "3.0.0",
   "servers": [
     {
-      "url": "/api/v1"
+      "url": "/api"
     }
   ],
   "info": {
     "description": "",
-    "version": "0.0.12",
-    "title": "Auction API for SENG365 2018 Assignments"
+    "version": "0.0.1",
+    "title": "API for Rural Holidays backend"
   },
   "tags": [
     {
-      "name": "auctions",
-      "description": "All auction-related endpoints"
+      "name": "listings",
+      "description": "All listing-related endpoints"
     },
     {
       "name": "photos",
-      "description": "Manipulation of the photos for an auction"
+      "description": "Manipulation of the photos for an listing"
     },
     {
       "name": "users",
-      "description": "Users of the auction server that can be sellers and buyers"
+      "description": "Users of the listing server that can be sellers and buyers"
     }
   ],
   "paths": {
@@ -63,12 +63,12 @@
         }
       }
     },
-    "/auctions": {
+    "/listings": {
       "get": {
         "tags": [
-          "auctions"
+          "listings"
         ],
-        "summary": "View auctions, sorted from most recent to least recent.",
+        "summary": "View listings, sorted from most recent to least recent.",
         "parameters": [
           {
             "in": "query",
@@ -91,7 +91,7 @@
           {
             "in": "query",
             "name": "q",
-            "description": "Search string for auction titles",
+            "description": "Search string for listing titles",
             "schema": {
               "type": "string"
             }
@@ -108,7 +108,7 @@
           {
             "in": "query",
             "name": "seller",
-            "description": "Only return auctions with this id as a seller",
+            "description": "Only return listings with this id as a seller",
             "schema": {
               "type": "integer",
               "minimum": 0
@@ -117,7 +117,7 @@
           {
             "in": "query",
             "name": "bidder",
-            "description": "Only return auctions which have a bid by this id",
+            "description": "Only return listings which have a bid by this id",
             "schema": {
               "type": "integer",
               "minimum": 0
@@ -126,7 +126,7 @@
           {
             "in": "query",
             "name": "winner",
-            "description": "Only return auctions which were won by this id",
+            "description": "Only return listings which were won by this id",
             "schema": {
               "type": "integer",
               "minimum": 0
@@ -135,7 +135,7 @@
           {
             "in": "query",
             "name": "status",
-            "description": "Return auctions with a certain status. Can be 'all', 'active', 'expired', 'upcoming' or 'won'",
+            "description": "Return listings with a certain status. Can be 'all', 'active', 'expired', 'upcoming' or 'won'",
             "schema": {
               "type": "string"
             }
@@ -147,7 +147,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/auctionsOverview"
+                  "$ref": "#/components/schemas/listingsOverview"
                 }
               }
             }
@@ -162,9 +162,9 @@
       },
       "post": {
         "tags": [
-          "auctions"
+          "listings"
         ],
-        "summary": "Create auction",
+        "summary": "Create listing",
         "security": [
           {
             "User": []
@@ -234,17 +234,17 @@
         }
       }
     },
-    "/auctions/{id}": {
+    "/listings/{id}": {
       "get": {
         "tags": [
-          "auctions"
+          "listings"
         ],
-        "summary": "View auction details",
+        "summary": "View listing details",
         "parameters": [
           {
             "in": "path",
             "name": "id",
-            "description": "auction id",
+            "description": "listing id",
             "required": true,
             "schema": {
               "type": "integer",
@@ -258,7 +258,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/auctionDetails"
+                  "$ref": "#/components/schemas/listingDetails"
                 }
               }
             }
@@ -279,9 +279,9 @@
       },
       "patch": {
         "tags": [
-          "auctions"
+          "listings"
         ],
-        "summary": "Change some selected information for an Auction",
+        "summary": "Change some selected information for a listing",
         "description": "Only those properties included in the requestBody are to be changed.",
         "security": [
           {
@@ -292,7 +292,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "Id of the auction to update",
+            "description": "Id of the listing to update",
             "required": true,
             "schema": {
               "type": "integer",
@@ -343,7 +343,7 @@
             "description": "Unauthorized."
           },
           "403": {
-            "description": "Forbidden - bidding has begun on the auction."
+            "description": "Forbidden - bidding has begun on the listing."
           },
           "404": {
             "description": "Not found."
@@ -354,12 +354,12 @@
         }
       }
     },
-    "/auctions/{id}/bids": {
+    "/listings/{id}/bids": {
       "parameters": [
         {
           "in": "path",
           "name": "id",
-          "description": "auction id",
+          "description": "listing id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -369,7 +369,7 @@
       ],
       "get": {
         "tags": [
-          "auctions"
+          "listings"
         ],
         "summary": "View bid history",
         "responses": {
@@ -396,9 +396,9 @@
       },
       "post": {
         "tags": [
-          "auctions"
+          "listings"
         ],
-        "summary": "Make bid on auction",
+        "summary": "Make bid on listing",
         "security": [
           {
             "User": []
@@ -431,19 +431,19 @@
         }
       }
     },
-    "/my_won_auctions": {
+    "/my_won_listings": {
       "get": {
         "tags": [
-          "auctions"
+          "listings"
         ],
-        "summary": "Get auctions that have been won by the currently logged in user.",
+        "summary": "Get listings that have been won by the currently logged in user.",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/auctionsOverview"
+                  "$ref": "#/components/schemas/listingsOverview"
                 }
               }
             }
@@ -460,7 +460,7 @@
     "/categories": {
       "get": {
         "tags": [
-          "auctions"
+          "listings"
         ],
         "summary": "Get all categories",
         "responses": {
@@ -483,12 +483,12 @@
         }
       }
     },
-    "/auctions/{id}/photos": {
+    "/listings/{id}/photos": {
       "parameters": [
         {
           "in": "path",
           "name": "id",
-          "description": "Id of the auction",
+          "description": "Id of the listing",
           "required": true,
           "schema": {
             "type": "integer",
@@ -500,7 +500,7 @@
         "tags": [
           "photos"
         ],
-        "summary": "Get auction photo",
+        "summary": "Get listing photo",
         "responses": {
           "200": {
             "description": "OK",
@@ -536,7 +536,7 @@
         "tags": [
           "photos"
         ],
-        "summary": "Add a photo to an auction",
+        "summary": "Add a photo to an listing",
         "security": [
           {
             "User": []
@@ -581,7 +581,7 @@
         "tags": [
           "photos"
         ],
-        "summary": "Delete a photo to an auction",
+        "summary": "Delete a photo to an listing",
         "security": [
           {
             "User": []
@@ -600,12 +600,12 @@
         }
       }
     },
-    "/auctions/{auction-id}/photos/{photo-id}": {
+    "/listings/{listing-id}/photos/{photo-id}": {
       "parameters": [
         {
           "in": "path",
-          "name": "auction-id",
-          "description": "Id of the auction",
+          "name": "listing-id",
+          "description": "Id of the listing",
           "required": true,
           "schema": {
             "type": "integer",
@@ -628,7 +628,7 @@
         "tags": [
           "photos"
         ],
-        "summary": "Get auction photo",
+        "summary": "Get listing photo",
         "responses": {
           "200": {
             "description": "OK",
@@ -663,7 +663,7 @@
         "tags": [
           "photos"
         ],
-        "summary": "Update auction photo",
+        "summary": "Update listing photo",
         "security": [
           {
             "User": []
@@ -712,7 +712,7 @@
         "tags": [
           "photos"
         ],
-        "summary": "Delete auction photo",
+        "summary": "Delete listing photo",
         "security": [
           {
             "User": []
@@ -953,7 +953,7 @@
   },
   "components": {
     "schemas": {
-      "auctionsOverview": {
+      "listingsOverview": {
         "type": "array",
         "items": {
           "type": "object",
@@ -961,7 +961,7 @@
             "id",
             "title"
           ],
-          "description": "summary data for an Auction",
+          "description": "summary data for a listing",
           "allOf": [
             {
               "type": "object",
@@ -1001,9 +1001,9 @@
           ]
         }
       },
-      "auctionDetails": {
+      "listingDetails": {
         "type": "object",
-        "description": "detailed Auction object",
+        "description": "detailed listing object",
         "required": [
           "id",
           "creationDateTime",
@@ -1145,7 +1145,7 @@
       },
       "bidHistory": {
         "type": "array",
-        "description": "history of bids on an Auction",
+        "description": "history of bids on a listing",
         "items": {
           "type": "object",
           "required": [
@@ -1257,8 +1257,8 @@
           }
         }
       },
-      "Auction": {
-        "title": "Auction",
+      "listing": {
+        "title": "listing",
         "type": "object",
         "properties": {
           "categoryId": {
@@ -1309,11 +1309,11 @@
           }
         }
       },
-      "PostAuction": {
+      "PostListing": {
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/Auction"
+            "$ref": "#/components/schemas/listing"
           }
         ],
         "required": [
@@ -1368,7 +1368,7 @@
             "id",
             "title"
           ],
-          "description": "summary data for an Auction",
+          "description": "summary data for a listing",
           "allOf": [
             {
               "type": "object",

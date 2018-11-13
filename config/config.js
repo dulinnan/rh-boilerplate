@@ -1,6 +1,16 @@
 const convict = require('convict');
 
 let config = convict({
+    port: {
+        format: 'port',
+        default: 4941,
+        arg: 'port',
+    },
+    basepath: {
+        format: String,
+        default: '/api/',
+        arg: 'basepath',
+    },
     authToken: {
         format: String,
         default: 'X-Authorization'
