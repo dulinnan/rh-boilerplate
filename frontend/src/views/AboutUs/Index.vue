@@ -238,50 +238,50 @@
 </template>
 
 <script>
-  /* ============
-         * Account Index Page
-         * ============
-         *
-         * Page where the user can view the account information.
-         */
+    /* ============
+             * Account Index Page
+             * ============
+             *
+             * Page where the user can view the account information.
+             */
 
-  import VLayout from '@/layouts/Default.vue';
-  import 'swiper/dist/css/swiper.css';
-  import {swiper, swiperSlide} from 'vue-awesome-swiper';
+    import VLayout from '@/layouts/Default.vue';
+    import 'swiper/dist/css/swiper.css';
+    import {swiper, swiperSlide} from 'vue-awesome-swiper';
 
-  export default {
-    /**
+    export default {
+        /**
      * The name of the page.
      */
-    name: 'AboutUsIndex',
+        name: 'AboutUsIndex',
 
-    /**
+        /**
      * The components that the page can use.
      */
-    components: {
-      VLayout,
-      swiper,
-      swiperSlide,
-    },
-
-    data() {
-      return {
-        swiperOption: {
-          slidesPerView: 1,
-          spaceBetween: 3,
-          loop: true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
+        components: {
+            VLayout,
+            swiper,
+            swiperSlide,
         },
-      };
-    },
-  };
+
+        data() {
+            return {
+                swiperOption: {
+                    slidesPerView: 1,
+                    spaceBetween: 3,
+                    loop: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                },
+            };
+        },
+    };
 </script>
 
 <style scoped>

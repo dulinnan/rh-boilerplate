@@ -38,22 +38,21 @@
 */
 
 /* :: 1.0 Import Fonts */
-
-@font-face {
-    font-family: 'FuturaLT-Book';
-    src: url('fonts/FuturaLT-Book.eot?#iefix') format('embedded-opentype'), url('fonts/FuturaLT-Book.woff') format('woff'), url('fonts/FuturaLT-Book.ttf') format('truetype'), url('fonts/FuturaLT-Book.svg#FuturaLT-Book') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+//@font-face {
+//    font-family: 'FuturaLT-Book';
+//    src: url('fonts/FuturaLT-Book.eot?#iefix') format('embedded-opentype'), url('fonts/FuturaLT-Book.woff') format('woff'), url('fonts/FuturaLT-Book.ttf') format('truetype'), url('fonts/FuturaLT-Book.svg#FuturaLT-Book') format('svg');
+//    font-weight: normal;
+//    font-style: normal;
+//}
 
 /* :: 2.0 Import All CSS */
 
 @import 'css/bootstrap.min.css';
 @import 'css/classy-nav.css';
-@import 'css/owl.carousel.min.css';
+//@import 'css/owl.carousel.min.css';
 @import 'css/animate.css';
 @import 'css/magnific-popup.css';
-@import 'css/font-awesome.min.css';
+//@import 'css/font-awesome.min.css';
 @import 'css/nice-select.css';
 @import 'css/travel-icon.css';
 

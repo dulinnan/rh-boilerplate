@@ -116,47 +116,47 @@
 </template>
 
 <script>
-  /* ============
-         * Account Index Page
-         * ============
-         *
-         * Page where the user can view the account information.
-         */
+    /* ============
+             * Account Index Page
+             * ============
+             *
+             * Page where the user can view the account information.
+             */
 
-  import VLayout from '@/layouts/Default.vue';
+    import VLayout from '@/layouts/Default.vue';
 
-  export default {
-    /**
+    export default {
+        /**
      * The name of the page.
      */
-    name: 'BookingIndex',
+        name: 'BookingIndex',
 
-    /**
+        /**
      * The components that the page can use.
      */
-    components: {
-      VLayout,
-    },
-    data() {
-      return {
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: '',
+        components: {
+            VLayout,
         },
-      };
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!');
-      },
-    },
-  };
+        data() {
+            return {
+                form: {
+                    name: '',
+                    region: '',
+                    date1: '',
+                    date2: '',
+                    delivery: false,
+                    type: [],
+                    resource: '',
+                    desc: '',
+                },
+            };
+        },
+        methods: {
+            onSubmit() {
+                console.log('submit!');
+            },
+        },
+    };
 </script>
 
 <style scoped>

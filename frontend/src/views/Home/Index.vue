@@ -238,135 +238,135 @@
 </template>
 
 <script>
-  /* ============
-         * Home Index Page
-         * ============
-         *
-         * The home index page.
-         */
+    /* ============
+             * Home Index Page
+             * ============
+             *
+             * The home index page.
+             */
 
-  import VLayout from '@/layouts/Default.vue';
-  import VContact from '@/components/Contact.vue';
+    import VLayout from '@/layouts/Default.vue';
+    import VContact from '@/components/Contact.vue';
 
-  export default {
-    /**
+    export default {
+        /**
      * The name of the page.
      */
-    name: 'HomeIndex',
+        name: 'HomeIndex',
 
-    /**
+        /**
      * The components that the page can use.
      */
-    components: {
-      VLayout,
-      VContact,
-    },
-    data() {
-      return {
-        slide: 0,
-        sliding: null,
-        carouselImgs: [
-          {
-            name: 'calf',
-            src: require('../../assets/carousel/calf.jpg'),
-            info: 'THIS IS A CALF',
-          },
-          {
-            name: 'farmer',
-            src: require('../../assets/carousel/farmer.jpg'),
-            info: 'THIS IS A FARMER',
-          },
-          {
-            name: 'blue',
-            src: require('../../assets/carousel/blue.jpg'),
-            info: 'THIS IS A BLUE FEMALE',
-          },
-          {
-            name: 'sheep',
-            src: require('../../assets/carousel/sheep.jpg'),
-            info: 'SHEEEEEEEPA',
-          },
-          {
-            name: 'calves',
-            src: require('../../assets/carousel/calves.jpg'),
-            info: 'CALVES. EDIBLE',
-          },
-          {
-            name: 'pumpkin',
-            src: require('../../assets/carousel/pumpkin.jpg'),
-            info: 'HALLOWEENS OVER',
-          },
-          {
-            name: 'boyAndDuck',
-            src: require('../../assets/carousel/boy-and-duck.jpeg'),
-            info: 'BOI AND DUCKY',
-          },
-        ],
-        introductionPara: {
-          title: 'Sharing the people that make New Zealand unique',
-          body: 'New Zealand is world famous for kind hospitality, friendliness, and a beautiful clean green ' +
+        components: {
+            VLayout,
+            VContact,
+        },
+        data() {
+            return {
+                slide: 0,
+                sliding: null,
+                carouselImgs: [
+                    {
+                        name: 'calf',
+                        src: require('../../assets/carousel/calf.jpg'),
+                        info: 'THIS IS A CALF',
+                    },
+                    {
+                        name: 'farmer',
+                        src: require('../../assets/carousel/farmer.jpg'),
+                        info: 'THIS IS A FARMER',
+                    },
+                    {
+                        name: 'blue',
+                        src: require('../../assets/carousel/blue.jpg'),
+                        info: 'THIS IS A BLUE FEMALE',
+                    },
+                    {
+                        name: 'sheep',
+                        src: require('../../assets/carousel/sheep.jpg'),
+                        info: 'SHEEEEEEEPA',
+                    },
+                    {
+                        name: 'calves',
+                        src: require('../../assets/carousel/calves.jpg'),
+                        info: 'CALVES. EDIBLE',
+                    },
+                    {
+                        name: 'pumpkin',
+                        src: require('../../assets/carousel/pumpkin.jpg'),
+                        info: 'HALLOWEENS OVER',
+                    },
+                    {
+                        name: 'boyAndDuck',
+                        src: require('../../assets/carousel/boy-and-duck.jpeg'),
+                        info: 'BOI AND DUCKY',
+                    },
+                ],
+                introductionPara: {
+                    title: 'Sharing the people that make New Zealand unique',
+                    body: 'New Zealand is world famous for kind hospitality, friendliness, and a beautiful clean green ' +
             'environment. Rural Tours offers you the chance to enjoy an authentic experience with local ' +
             'New Zealand people. In addition to being New Zealand\'s largest farmstay reservations company, ' +
             'we offer New Zealand lifestyle experiences, home visits with morning/afternoon tea or lunch; ' +
             'technical visits for special interest groups; and specialist programmes for student group tours.',
-        },
-        featuredLocations: [
-          {
-            name: 'MATAMATA, WAIKATO',
-            info: 'Matamata is a rural town nestled at the base of the scenic Kaimai Ranges',
-            src: require('../../assets/featuredLocation/matamata.jpeg'),
-            price: '999',
-          },
-          {
-            name: 'ROTORUA, BAY OF PLENTY',
-            info: 'Rotorua is a lake shore town and is at the heart of the North Island',
-            src: require('../../assets/featuredLocation/rotorua.jpeg'),
-            price: '888',
-          },
-          {
-            name: 'FAIRLIE, CANTERBURY',
-            info: 'Fairlie is a typical New Zealand rural town and a gateway to the MacKenzie Region',
-            src: require('../../assets/featuredLocation/fairlie.jpg'),
-            price: '777',
-          },
-        ],
-        videoPara: {
-          title: 'Your Opportunity to experience real rural life in New Zealand. Sharing the people that make New Zealand unique.',
-          body: 'Please feel free to view Rural Tours promotional video to gain insight into what we have to offer you.',
-        },
-        discoverFeatures: [
-          {
-            name: 'Farmstays',
-            info: 'A Rural Holidays Farmstay offers a unique opportunity for you to enjoy the hospitality of friendly New Zealanders in the comfort of their homes.',
-            src: require('../../assets/discoverFeature/guitar.jpg'),
-          },
-          {
-            name: 'Group Tour',
-            info: 'Rural Holidays handles a large number of group tour farmstay bookings. Unlike some countries that offer one large \'ranch\' with commercial accommodation on-site, Rural Tours offers accommodation on individual farms for groups of 10-300 people.',
-            src: require('../../assets/discoverFeature/group-tour.jpg'),
-          },
-          {
-            name: 'About Us',
-            info: 'Today, Rural Holidays is the only original one owner operated company in the New Zealand farm and country home stay market since establishment in 1983.',
-            src: require('../../assets/discoverFeature/about-us.jpg'),
-          },
-        ],
+                },
+                featuredLocations: [
+                    {
+                        name: 'MATAMATA, WAIKATO',
+                        info: 'Matamata is a rural town nestled at the base of the scenic Kaimai Ranges',
+                        src: require('../../assets/featuredLocation/matamata.jpeg'),
+                        price: '999',
+                    },
+                    {
+                        name: 'ROTORUA, BAY OF PLENTY',
+                        info: 'Rotorua is a lake shore town and is at the heart of the North Island',
+                        src: require('../../assets/featuredLocation/rotorua.jpeg'),
+                        price: '888',
+                    },
+                    {
+                        name: 'FAIRLIE, CANTERBURY',
+                        info: 'Fairlie is a typical New Zealand rural town and a gateway to the MacKenzie Region',
+                        src: require('../../assets/featuredLocation/fairlie.jpg'),
+                        price: '777',
+                    },
+                ],
+                videoPara: {
+                    title: 'Your Opportunity to experience real rural life in New Zealand. Sharing the people that make New Zealand unique.',
+                    body: 'Please feel free to view Rural Tours promotional video to gain insight into what we have to offer you.',
+                },
+                discoverFeatures: [
+                    {
+                        name: 'Farmstays',
+                        info: 'A Rural Holidays Farmstay offers a unique opportunity for you to enjoy the hospitality of friendly New Zealanders in the comfort of their homes.',
+                        src: require('../../assets/discoverFeature/guitar.jpg'),
+                    },
+                    {
+                        name: 'Group Tour',
+                        info: 'Rural Holidays handles a large number of group tour farmstay bookings. Unlike some countries that offer one large \'ranch\' with commercial accommodation on-site, Rural Tours offers accommodation on individual farms for groups of 10-300 people.',
+                        src: require('../../assets/discoverFeature/group-tour.jpg'),
+                    },
+                    {
+                        name: 'About Us',
+                        info: 'Today, Rural Holidays is the only original one owner operated company in the New Zealand farm and country home stay market since establishment in 1983.',
+                        src: require('../../assets/discoverFeature/about-us.jpg'),
+                    },
+                ],
 
-      };
-    },
-    mounted() {
-      // this.logImgPath();
-    },
-    methods: {
-      logImgPath() {
-        const lenOfCarousel = this.carouselImgs.length;
-        for (let i = 0; i < lenOfCarousel; i++) {
-          console.log(this.carouselImgs[i].src);
+            };
+        },
+        mounted() {
+            // this.logImgPath();
+        },
+        methods: {
+            logImgPath() {
+                const lenOfCarousel = this.carouselImgs.length;
+                for (let i = 0; i < lenOfCarousel; i++) {
+                    console.log(this.carouselImgs[i].src);
       }
     },
-    },
+        },
 
-  };
+    };
 </script>
 
 <style scoped>
