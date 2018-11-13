@@ -19,11 +19,9 @@ import './plugins/axios';
 import { i18n } from './plugins/vue-i18n';
 import { router } from './plugins/vue-router';
 import './plugins/vuex-router-sync';
-// import './plugins/bootstrap';
-// import './plugins/font-awesome';
 import './plugins/register-service-worker';
-import BootstrapVue from 'bootstrap-vue';
-Vue.use(BootstrapVue);
+
+
 /* ============
  * Styling
  * ============
@@ -42,8 +40,10 @@ Vue.use(BootstrapVue);
 
 // import './assets/stylus/app.styl';
 import './assets/stylus/style.css';
-
-
+import './assets/stylus/css/element-custom-theme/index.css';
+import locale from 'element-ui/lib/locale/lang/en';
+import BootstrapVue from 'bootstrap-vue';
+import ElementUI from 'element-ui';
 
 /* ============
  * Main App
@@ -54,6 +54,9 @@ import './assets/stylus/style.css';
 
 import App from './App.vue';
 import store from './store';
+
+Vue.use(BootstrapVue);
+Vue.use(ElementUI, {locale});
 
 Vue.config.productionTip = false;
 

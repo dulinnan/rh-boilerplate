@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
+
   </div>
 </template>
 <script>
@@ -24,15 +27,9 @@ export default {
   mounted() {
     // If the user is authenticated,
     // fetch the data from the API
-    if (this.$store.state.auth.authenticated) {
-      this.$store.dispatch('account/find');
-    }
+    // if (this.$store.state.auth.authenticated) {
+    //   this.$store.dispatch('account/find');
+    // }
   },
 };
 </script>
-
-<style>
-    /*#app{*/
-        /*font-family: "Lato", "Helvetica Condensed Light", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;*/
-    /*}*/
-</style>

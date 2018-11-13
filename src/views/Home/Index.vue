@@ -4,28 +4,49 @@
       <div>
         <!--Carousel header area-->
         <div class="head-carousel">
-          <b-carousel id="carousel1"
-                      style="text-shadow: 1px 1px 2px #333"
-                      img-width="1024"
-                      img-height="480"
-                      :interval="4000"
-                      v-model="slide"
-                      @sliding-start="onSlideStart"
-                      @sliding-end="onSlideEnd">
+          <b-carousel
+            id="carousel1"
+            :interval="4000"
+            v-model="slide"
+            style="text-shadow: 1px 1px 2px #333"
+            img-width="1024"
+            img-height="480"
+            @sliding-start="onSlideStart"
+            @sliding-end="onSlideEnd">
 
             <!-- Slides with custom text -->
             <b-carousel-slide v-for="carouselImg in carouselImgs">
-              <img slot="img" class="d-block w-100" width="1024" height="480"
-                   :src="carouselImg.src" :alt="carouselImg.name" style="object-fit: cover;">
+              <img
+                slot="img"
+                :src="carouselImg.src"
+                :alt="carouselImg.name"
+                class="d-block w-100"
+                width="1024"
+                height="480"
+                style="object-fit: cover;">
               <div class="container">
                 <div class="row justify-content-center">
                   <div class="col-12 col-lg-9">
                     <!-- Slide Content -->
-                    <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
-                      <div class="line" data-animation="fadeInUp" data-delay="300ms"></div>
-                      <h2 data-animation="fadeInUp" data-delay="500ms">{{carouselImg.name}}</h2>
-                      <p data-animation="fadeInUp" data-delay="700ms">{{carouselImg.info}}</p>
-                      <a href="#" class="btn rh-btn mt-30" data-animation="fadeInUp" data-delay="900ms">Read
+                    <div
+                      class="hero-slides-content"
+                      data-animation="fadeInUp"
+                      data-delay="100ms">
+                      <div
+                        class="line"
+                        data-animation="fadeInUp"
+                        data-delay="300ms"/>
+                      <h2
+                        data-animation="fadeInUp"
+                        data-delay="500ms">{{ carouselImg.name }}</h2>
+                      <p
+                        data-animation="fadeInUp"
+                        data-delay="700ms">{{ carouselImg.info }}</p>
+                      <a
+                        href="#"
+                        class="btn rh-btn mt-30"
+                        data-animation="fadeInUp"
+                        data-delay="900ms">Read
                         More</a>
 
                     </div>
@@ -45,34 +66,48 @@
               <div class="col-12 col-lg-6">
                 <div class="about-text text-center mb-100">
                   <div class="section-heading text-center">
-                    <div class="line-"></div>
+                    <div class="line-"/>
                     <h2>A place to remember</h2>
                   </div>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
                     sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                   <div class="about-key-text">
-                    <h6><span class="iconfont icon-check"></span> Donec malesuada lorem maximus mauris sceleri</h6>
-                    <h6><span class="iconfont icon-check"></span> Malesuada lorem maximus mauris sceleri</h6>
-                    <h6><span class="iconfont icon-check"></span> At vero eos et accusamus et iusto odio dignissimos</h6>
+                    <h6><span class="iconfont icon-check"/> Donec malesuada lorem maximus mauris sceleri</h6>
+                    <h6><span class="iconfont icon-check"/> Malesuada lorem maximus mauris sceleri</h6>
+                    <h6><span class="iconfont icon-check"/> At vero eos et accusamus et iusto odio dignissimos</h6>
                   </div>
-                  <a href="#" class="btn rh-btn mt-50">Read More</a>
+                  <a
+                    href="#"
+                    class="btn rh-btn mt-50">Read More</a>
                 </div>
               </div>
 
               <div class="col-12 col-lg-6">
                 <div class="about-thumbnail homepage mb-100">
                   <!-- First Img -->
-                  <div class="first-img wow fadeInUp" data-wow-delay="100ms">
-                    <img src="../../assets/discoverFeature/group-tour.jpg" alt="">
+                  <div
+                    class="first-img wow fadeInUp"
+                    data-wow-delay="100ms">
+                    <img
+                      src="../../assets/discoverFeature/group-tour.jpg"
+                      alt="">
                   </div>
                   <!-- Second Img -->
-                  <div class="second-img wow fadeInUp" data-wow-delay="300ms">
-                    <img src="../../assets/discoverFeature/guitar.jpg" alt="">
+                  <div
+                    class="second-img wow fadeInUp"
+                    data-wow-delay="300ms">
+                    <img
+                      src="../../assets/discoverFeature/guitar.jpg"
+                      alt="">
                   </div>
                   <!-- Third Img-->
-                  <div class="third-img wow fadeInUp" data-wow-delay="500ms">
-                    <img src="../../assets/discoverFeature/about-us.jpg" alt="">
+                  <div
+                    class="third-img wow fadeInUp"
+                    data-wow-delay="500ms">
+                    <img
+                      src="../../assets/discoverFeature/about-us.jpg"
+                      alt="">
                   </div>
                 </div>
               </div>
@@ -86,9 +121,11 @@
           <div class="container">
             <div class="row justify-content-end">
               <div class="col-12 col-lg-7">
-                <div class="pool-content text-center wow fadeInUp" data-wow-delay="300ms">
+                <div
+                  class="pool-content text-center wow fadeInUp"
+                  data-wow-delay="300ms">
                   <div class="section-heading text-center white">
-                    <div class="line-"></div>
+                    <div class="line-"/>
                     <h2>Poop Pool</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
                       sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
@@ -99,25 +136,27 @@
                   <div class="row">
                     <div class="col-12 col-sm-4">
                       <div class="pool-feature">
-                        <i class="iconfont icon-lvyouchengshijianzhucity-nongminfarmer"></i>
+                        <i class="iconfont icon-lvyouchengshijianzhucity-nongminfarmer"/>
                         <p>Poop Beachbar</p>
                       </div>
                     </div>
                     <div class="col-12 col-sm-4">
                       <div class="pool-feature">
-                        <i class="iconfont icon-sheep"></i>
+                        <i class="iconfont icon-sheep"/>
                         <p>Infinity Poop</p>
                       </div>
                     </div>
                     <div class="col-12 col-sm-4">
                       <div class="pool-feature">
-                        <i class="iconfont icon-nongyaohuafei"></i>
+                        <i class="iconfont icon-nongyaohuafei"/>
                         <p>Sunpoops</p>
                       </div>
                     </div>
                   </div>
                   <!-- Button -->
-                  <a href="#" class="btn rh-btn mt-50">Read More</a>
+                  <a
+                    href="#"
+                    class="btn rh-btn mt-50">Read More</a>
                 </div>
               </div>
             </div>
@@ -131,7 +170,7 @@
             <div class="row justify-content-center">
               <div class="col-12 col-lg-6">
                 <div class="section-heading text-center">
-                  <div class="line-"></div>
+                  <div class="line-"/>
                   <h2>Curated List</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
                     sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien.</p>
@@ -142,21 +181,28 @@
             <div class="row justify-content-center">
 
               <!-- Single Rooms Area -->
-              <div class="col-12 col-md-6 col-lg-4 " v-for="location in featuredLocations">
-                <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
+              <div
+                v-for="location in featuredLocations"
+                class="col-12 col-md-6 col-lg-4 ">
+                <div
+                  class="single-rooms-area wow fadeInUp"
+                  data-wow-delay="100ms">
                   <!-- Thumbnail -->
-                  <div class="bg-thumbnail bg-img"
-                       v-bind:style="{ 'background-image': 'url(' + location.src + ')' }"></div>
+                  <div
+                    :style="{ 'background-image': 'url(' + location.src + ')' }"
+                    class="bg-thumbnail bg-img"/>
                   <!-- Price -->
-                  <p class="price-from">From ${{location.price}}/night</p>
+                  <p class="price-from">From ${{ location.price }}/night</p>
                   <!-- Rooms Text -->
                   <div class="rooms-text">
-                    <div class="line"></div>
-                    <h4>{{location.name}}</h4>
-                    <p>{{location.info}}</p>
+                    <div class="line"/>
+                    <h4>{{ location.name }}</h4>
+                    <p>{{ location.info }}</p>
                   </div>
                   <!-- Book Room -->
-                  <a href="#" class="book-room-btn btn rh-btn">Book a stay</a>
+                  <a
+                    href="#"
+                    class="book-room-btn btn rh-btn">Book a stay</a>
                 </div>
               </div>
 
@@ -185,20 +231,19 @@
         <!--Video group area ends-->
 
 
-
       </div>
-      <v-contact> </v-contact>
+      <v-contact/>
     </v-layout>
   </div>
 </template>
 
 <script>
   /* ============
-   * Home Index Page
-   * ============
-   *
-   * The home index page.
-   */
+         * Home Index Page
+         * ============
+         *
+         * The home index page.
+         */
 
   import VLayout from '@/layouts/Default.vue';
   import VContact from '@/components/Contact.vue';
@@ -224,37 +269,37 @@
           {
             name: 'calf',
             src: require('../../assets/carousel/calf.jpg'),
-            info: 'THIS IS A CALF'
+            info: 'THIS IS A CALF',
           },
           {
             name: 'farmer',
             src: require('../../assets/carousel/farmer.jpg'),
-            info: 'THIS IS A FARMER'
+            info: 'THIS IS A FARMER',
           },
           {
             name: 'blue',
             src: require('../../assets/carousel/blue.jpg'),
-            info: 'THIS IS A BLUE FEMALE'
+            info: 'THIS IS A BLUE FEMALE',
           },
           {
             name: 'sheep',
             src: require('../../assets/carousel/sheep.jpg'),
-            info: 'SHEEEEEEEPA'
+            info: 'SHEEEEEEEPA',
           },
           {
             name: 'calves',
             src: require('../../assets/carousel/calves.jpg'),
-            info: 'CALVES. EDIBLE'
+            info: 'CALVES. EDIBLE',
           },
           {
             name: 'pumpkin',
             src: require('../../assets/carousel/pumpkin.jpg'),
-            info: 'HALLOWEENS OVER'
+            info: 'HALLOWEENS OVER',
           },
           {
             name: 'boyAndDuck',
             src: require('../../assets/carousel/boy-and-duck.jpeg'),
-            info: 'BOI AND DUCKY'
+            info: 'BOI AND DUCKY',
           },
         ],
         introductionPara: {
@@ -270,19 +315,19 @@
             name: 'MATAMATA, WAIKATO',
             info: 'Matamata is a rural town nestled at the base of the scenic Kaimai Ranges',
             src: require('../../assets/featuredLocation/matamata.jpeg'),
-            price: '999'
+            price: '999',
           },
           {
             name: 'ROTORUA, BAY OF PLENTY',
             info: 'Rotorua is a lake shore town and is at the heart of the North Island',
             src: require('../../assets/featuredLocation/rotorua.jpeg'),
-            price: '888'
+            price: '888',
           },
           {
             name: 'FAIRLIE, CANTERBURY',
             info: 'Fairlie is a typical New Zealand rural town and a gateway to the MacKenzie Region',
             src: require('../../assets/featuredLocation/fairlie.jpg'),
-            price: '777'
+            price: '777',
           },
         ],
         videoPara: {
@@ -293,44 +338,38 @@
           {
             name: 'Farmstays',
             info: 'A Rural Holidays Farmstay offers a unique opportunity for you to enjoy the hospitality of friendly New Zealanders in the comfort of their homes.',
-            src: require('../../assets/discoverFeature/guitar.jpg')
+            src: require('../../assets/discoverFeature/guitar.jpg'),
           },
           {
             name: 'Group Tour',
             info: 'Rural Holidays handles a large number of group tour farmstay bookings. Unlike some countries that offer one large \'ranch\' with commercial accommodation on-site, Rural Tours offers accommodation on individual farms for groups of 10-300 people.',
-            src: require('../../assets/discoverFeature/group-tour.jpg')
+            src: require('../../assets/discoverFeature/group-tour.jpg'),
           },
           {
             name: 'About Us',
             info: 'Today, Rural Holidays is the only original one owner operated company in the New Zealand farm and country home stay market since establishment in 1983.',
-            src: require('../../assets/discoverFeature/about-us.jpg')
+            src: require('../../assets/discoverFeature/about-us.jpg'),
           },
         ],
 
       };
     },
-    methods: {
-      onSlideStart(slide) {
-        this.sliding = true;
-      },
-      onSlideEnd(slide) {
-        this.sliding = false;
-      },
-      logImgPath: function () {
-        const lenOfCarousel = this.carouselImgs.length;
-        for (var i = 0; i < lenOfCarousel; i++) {
-          console.log(this.carouselImgs[i].src);
-        }
-      }
-    },
     mounted() {
       // this.logImgPath();
+    },
+    methods: {
+      logImgPath() {
+        const lenOfCarousel = this.carouselImgs.length;
+        for (let i = 0; i < lenOfCarousel; i++) {
+          console.log(this.carouselImgs[i].src);
+      }
+    },
     },
 
   };
 </script>
 
-<style>
+<style scoped>
   @media only screen and (min-width: 540px) and (max-width: 1024px) {
     .hero-slides-content {
       background-color: rgba(0, 0, 0, 0.4);
@@ -352,7 +391,7 @@
       z-index: 2;
       content: '';
       position: absolute;
-      right: 0rem;
+      right: 0;
       display: block;
       pointer-events: none;
       overflow: hidden
@@ -381,7 +420,7 @@
       z-index: 2;
       content: '';
       position: absolute;
-      right: 0rem;
+      right: 0;
       display: block;
       pointer-events: none;
       overflow: hidden

@@ -15,20 +15,24 @@
           <div class="col-12 col-lg-6">
             <div class="about-text mb-100">
               <div class="section-heading">
-                <div class="line-"></div>
+                <div class="line-"/>
                 <h2>A place to remember</h2>
               </div>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri
                 sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Lorem ipsum
                 dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at
                 rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-              <a href="#" class="btn rh-btn mt-50">Read More</a>
+              <a
+                href="#"
+                class="btn rh-btn mt-50">Read More</a>
             </div>
           </div>
 
           <div class="col-12 col-lg-6">
             <div class="about-thumbnail mb-100">
-              <img src="../../assets/aboutUs/architecture-bungalow.jpg" alt="">
+              <img
+                src="../../assets/aboutUs/architecture-bungalow.jpg"
+                alt="">
             </div>
           </div>
         </div>
@@ -42,7 +46,7 @@
         <div class="row justify-content-center">
           <div class="col-12 col-lg-8">
             <div class="section-heading text-center white">
-              <div class="line-"></div>
+              <div class="line-"/>
               <h2>Our Milestones</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri
                 sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Lorem ipsum
@@ -56,9 +60,11 @@
 
           <!-- Single Cool Facts -->
           <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single-cool-fact mb-100 wow fadeInUp" data-wow-delay="300ms">
+            <div
+              class="single-cool-fact mb-100 wow fadeInUp"
+              data-wow-delay="300ms">
               <div class="scf-text">
-                <i class="iconfont icon-lvyouchengshijianzhucity-nongminfarmer"></i>
+                <i class="iconfont icon-lvyouchengshijianzhucity-nongminfarmer"/>
                 <h2><span class="counter">231</span></h2>
                 <p>Tractors</p>
               </div>
@@ -67,9 +73,11 @@
 
           <!-- Single Cool Facts -->
           <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single-cool-fact mb-100 wow fadeInUp" data-wow-delay="500ms">
+            <div
+              class="single-cool-fact mb-100 wow fadeInUp"
+              data-wow-delay="500ms">
               <div class="scf-text">
-                <i class="iconfont icon-nongye"></i>
+                <i class="iconfont icon-nongye"/>
                 <h2><span class="counter">3</span></h2>
                 <p>Weeds</p>
               </div>
@@ -78,9 +86,11 @@
 
           <!-- Single Cool Facts -->
           <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single-cool-fact mb-100 wow fadeInUp" data-wow-delay="700ms">
+            <div
+              class="single-cool-fact mb-100 wow fadeInUp"
+              data-wow-delay="700ms">
               <div class="scf-text">
-                <i class="iconfont icon-sheep"></i>
+                <i class="iconfont icon-sheep"/>
                 <h2><span class="counter">79</span></h2>
                 <p>Sheep</p>
               </div>
@@ -89,9 +99,11 @@
 
           <!-- Single Cool Facts -->
           <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single-cool-fact mb-100 wow fadeInUp" data-wow-delay="900ms">
+            <div
+              class="single-cool-fact mb-100 wow fadeInUp"
+              data-wow-delay="900ms">
               <div class="scf-text">
-                <i class="iconfont icon-lvyouchengshijianzhucity-nongminfarmer"></i>
+                <i class="iconfont icon-lvyouchengshijianzhucity-nongminfarmer"/>
                 <h2><span class="counter">25</span></h2>
                 <p>Hectares</p>
               </div>
@@ -109,7 +121,7 @@
         <div class="row">
           <div class="col-12">
             <div class="section-heading text-center">
-              <div class="line-"></div>
+              <div class="line-"/>
               <h2>Our Promises</h2>
             </div>
           </div>
@@ -120,12 +132,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <div class="single-hotel-info mb-100">
               <div class="hotel-info-text">
-                <h6><span class="iconfont icon-check"></span> Donec malesuada lorem maximus mauris</h6>
-                <h6><span class="iconfont icon-check"></span> Integer tempus ligula sem, id feugiat</h6>
-                <h6><span class="iconfont icon-check"></span> Malesuada lorem maximus mauris sceleri </h6>
+                <h6><span class="iconfont icon-check"/> Donec malesuada lorem maximus mauris</h6>
+                <h6><span class="iconfont icon-check"/> Integer tempus ligula sem, id feugiat</h6>
+                <h6><span class="iconfont icon-check"/> Malesuada lorem maximus mauris sceleri </h6>
               </div>
               <div class="hotel-img">
-                <img src="../../assets/aboutUs/baby-boy-child.jpg" alt="">
+                <img
+                  src="../../assets/aboutUs/baby-boy-child.jpg"
+                  alt="">
               </div>
             </div>
           </div>
@@ -133,12 +147,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <div class="single-hotel-info mb-100">
               <div class="hotel-info-text">
-                <h6><span class="iconfont icon-check"></span> Tempus ligula sem, id feugiat quam</h6>
-                <h6><span class="iconfont icon-check"></span> Integer tempus ligula sem, id feugiat</h6>
-                <h6><span class="iconfont icon-check"></span> Esuada lorem maximus mauris sceleri</h6>
+                <h6><span class="iconfont icon-check"/> Tempus ligula sem, id feugiat quam</h6>
+                <h6><span class="iconfont icon-check"/> Integer tempus ligula sem, id feugiat</h6>
+                <h6><span class="iconfont icon-check"/> Esuada lorem maximus mauris sceleri</h6>
               </div>
               <div class="hotel-img">
-                <img src="../../assets/aboutUs/blur-care-close-up.jpg" alt="">
+                <img
+                  src="../../assets/aboutUs/blur-care-close-up.jpg"
+                  alt="">
               </div>
             </div>
           </div>
@@ -146,12 +162,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <div class="single-hotel-info mb-100">
               <div class="hotel-info-text">
-                <h6><span class="iconfont icon-check"></span> Tempus ligula sem, id feugiat quam</h6>
-                <h6><span class="iconfont icon-check"></span> Integer tempus ligula sem, id feugiat</h6>
-                <h6><span class="iconfont icon-check"></span> Esuada lorem maximus mauris sceleri</h6>
+                <h6><span class="iconfont icon-check"/> Tempus ligula sem, id feugiat quam</h6>
+                <h6><span class="iconfont icon-check"/> Integer tempus ligula sem, id feugiat</h6>
+                <h6><span class="iconfont icon-check"/> Esuada lorem maximus mauris sceleri</h6>
               </div>
               <div class="hotel-img">
-                <img src="../../assets/aboutUs/adult-agriculture-animal.jpg" alt="">
+                <img
+                  src="../../assets/aboutUs/adult-agriculture-animal.jpg"
+                  alt="">
               </div>
             </div>
           </div>
@@ -167,33 +185,48 @@
           <div class="col-12">
             <div class="testimonial-content">
               <div class="section-heading text-center">
-                <div class="line-"></div>
+                <div class="line-"/>
                 <h2>What Customers Say</h2>
               </div>
               <!-- Testimonial Slides -->
-              <div class="testimonial-slides owl-carousel">
 
-                <!-- Single Testimonial -->
-                <div class="single-testimonial">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
-                    sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
-                    sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-                  <h6>Michael Smith, <span>Client</span></h6>
-                  <img src="../../assets/aboutUs/trip.png" alt="">
-                </div>
+              <md-card>
+                <md-card-media>
+                  <!-- swiper -->
+                  <swiper :options="swiperOption">
+                    <swiper-slide>
+                      <!-- Single Testimonial -->
+                      <div class="single-testimonial">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                          sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
+                          finibus.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                          sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
+                          finibus.</p>
+                        <h6>Michael Smith, <span>Client</span></h6>
+                        <img
+                          src="../../assets/aboutUs/trip.png"
+                          alt="">
+                      </div>
+                    </swiper-slide>
+                    <swiper-slide>
+                      <!-- Single Testimonial -->
+                      <div class="single-testimonial">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                          sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
+                          finibus.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                          sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
+                          finibus.</p>
+                        <h6>Nazrul Islam, <span>Developer</span></h6>
+                        <!--<img src="../../assets/aboutUs/trip.png" alt="">-->
+                      </div>
+                    </swiper-slide>
+                    <!--<div class="swiper-pagination" slot="pagination"></div>-->
 
-                <!-- Single Testimonial -->
-                <div class="single-testimonial">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
-                    sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
-                    sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-                  <h6>Nazrul Islam, <span>Developer</span></h6>
-                  <img src="../../assets/aboutUs/trip.png" alt="">
-                </div>
-
-              </div>
+                  </swiper>
+                </md-card-media>
+              </md-card>
 
             </div>
           </div>
@@ -206,13 +239,15 @@
 
 <script>
   /* ============
-   * Account Index Page
-   * ============
-   *
-   * Page where the user can view the account information.
-   */
+         * Account Index Page
+         * ============
+         *
+         * Page where the user can view the account information.
+         */
 
   import VLayout from '@/layouts/Default.vue';
+  import 'swiper/dist/css/swiper.css';
+  import {swiper, swiperSlide} from 'vue-awesome-swiper';
 
   export default {
     /**
@@ -225,11 +260,31 @@
      */
     components: {
       VLayout,
+      swiper,
+      swiperSlide,
+    },
+
+    data() {
+      return {
+        swiperOption: {
+          slidesPerView: 1,
+          spaceBetween: 3,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        },
+      };
     },
   };
 </script>
 
-<style>
+<style scoped>
   .breadcumb-area {
     background-image: url("../../assets/aboutUs/dawn-daylight-dusk.jpg");
   }

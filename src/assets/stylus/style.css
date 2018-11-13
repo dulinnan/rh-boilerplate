@@ -32,12 +32,8 @@
 */
 /* :: 1.0 Import Fonts */
 @import url(css/bootstrap.min.css);
-/*@import url(css/classy-nav.css);*/
-/*@import url(css/owl.carousel.min.css);*/
-/*@import url(css/owl.theme.default.min.css);*/
 @import url(css/animate.css);
 @import url(css/magnific-popup.css);
-/*@import url(css/font-awesome.min.css);*/
 @import url(css/iconfont.css);
 @import url(css/nice-select.css);
 /*@import url(css/travel-icon.css);*/
@@ -47,11 +43,10 @@
     /*font-weight: normal;*/
     /*font-style: normal;*/
 /*}*/
-/*@import url('https://fonts.googleapis.com/css?family=Bree+Serif');*/
 @font-face {
     font-family: "Bree";
-    /*src: url("fonts/Bree Light.otf") format("opentype");*/
-  src: url("fonts/Bree Regular.otf") format("opentype");
+  src: url("fonts/Bree Light.otf") format("opentype");
+  /*src: url("fonts/Bree Regular.otf") format("opentype");*/
 }
 
 @font-face {

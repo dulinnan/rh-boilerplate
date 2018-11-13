@@ -68,9 +68,14 @@
                 <a
                   class="dropdown-item"
                   href="#">Reservation & Booking Info</a>
-                <a
+                <router-link
+                  :to="{ name: 'booking.index' }"
                   class="dropdown-item"
-                  href="#">Booking Form</a>
+                  tag="a"
+                  exact
+                >
+                  Booking Form
+                </router-link>
                 <a
                   class="dropdown-item"
                   href="#">Pricing</a>
@@ -116,7 +121,7 @@
               <a
                 id="navbarDropdown"
                 class="nav-link dropdown-toggle"
-                href="#"
+                href="/about-us"
                 role="button"
                 aria-haspopup="true"
                 aria-expanded="false">
@@ -125,18 +130,30 @@
               <div
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdown">
-                <a
+                <router-link
+                  :to="{ name: 'aboutus.index' }"
                   class="dropdown-item"
-                  href="#/about-us">Our Story</a>
-                <a
+                  exact
+                >Our Story
+                </router-link>
+                <router-link
+                  :to="{ name: 'aboutus.index' }"
                   class="dropdown-item"
-                  href="#">Become a host</a>
-                <a
+                  exact
+                >Become a host
+                </router-link>
+                <router-link
+                  :to="{ name: 'aboutus.index' }"
                   class="dropdown-item"
-                  href="#">Terms & Conditons</a>
-                <a
+                  exact
+                >Terms & Conditons
+                </router-link>
+                <router-link
+                  :to="{ name: 'aboutus.index' }"
                   class="dropdown-item"
-                  href="#">Trade Info</a>
+                  exact
+                >Trade Info
+                </router-link>
               </div>
             </li>
 
@@ -153,16 +170,17 @@
             </router-link>
           </ul>
           <div class="menu-btn">
-            <a
-              href="#"
-              class="btn rh-btn">Booking Request</a>
+            <router-link
+              :to="{ name: 'booking.index' }"
+              class="btn rh-btn"
+              tag="ul"
+              exact
+            >
+              Booking Request
+            </router-link>
           </div>
         </div>
-
-
       </nav>
-
-
     </header>
 
 
