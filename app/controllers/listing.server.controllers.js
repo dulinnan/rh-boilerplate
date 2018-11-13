@@ -1,4 +1,4 @@
-const auctions = require('../models/auction.server.models'),
+const listings = require('../models/listing.server.models'),
     users = require('../models/user.server.models'),
     log = require('../lib/logger')(),
     validator = require('../lib/validator'),
@@ -10,13 +10,13 @@ const auctions = require('../models/auction.server.models'),
 
 
 /**
- * list all auctions
+ * list all listings
  */
 exports.list = function (req, res) {
-    console.log("get all auctions...");
-    validator.areValidParameters(req.query, schema.paths['/auctions'].get.parameters)
+    console.log("get all listings...");
+    validator.areValidParameters(req.query, schema.paths['/listings'].get.parameters)
         .then(function () {
-            auctions.getAll(req.query, function (err, results) {
+            listings.getAll(req.query, function (err, results) {
 
                 if (err || !results) {
                     // console.log("err", err);
@@ -28,7 +28,7 @@ exports.list = function (req, res) {
                     //console.log("empty");
                     return res.status(200).json(results);
                 } else {
-                    if (!validator.isValidSchema(results, 'components.schemas.auctionsOverview')) {
+                    if (!validator.isValidSchema(results, 'components.schemas.listingsOverview')) {
                         log.warn(JSON.stringify(results, null, 2));
                         log.warn(validator.getLastErrors());
                         return res.sendStatus(500);
@@ -45,31 +45,31 @@ exports.list = function (req, res) {
 }
 
 /**
- * create a new auction, from a request body that follows the `Auction` schema definition
+ * create a new listing, from a request body that follows the `Listing` schema definition
  *
  * (must be authenticated)
  */
 exports.create = function (req, res) {
     console.log(JSON.stringify(req.body));
-    if (!validator.isValidSchema(req.body, 'components.schemas.PostAuction')) {
-        log.warn(`auctions.controller.create: bad auction against schema ${JSON.stringify(req.body)}`);
+    if (!validator.isValidSchema(req.body, 'components.schemas.PostListing')) {
+        log.warn(`listings.controller.create: bad listing against schema ${JSON.stringify(req.body)}`);
         return res.sendStatus(400);
     } else {
-        let auction = Object.assign({}, req.body);
+        let listing = Object.assign({}, req.body);
 
-        if (!auction["endDateTime"] || auction["endDateTime"] <= 0) {
-            log.warn(`auctions.controller.create: bad end date ${JSON.stringify(auction)}`);
+        if (!listing["endDateTime"] || listing["endDateTime"] <= 0) {
+            log.warn(`listings.controller.create: bad end date ${JSON.stringify(listing)}`);
             return res.sendStatus(400);
         }
 
         let date_time_now = (new Date).getTime();
-        if (!auction["startDateTime"] || auction["startDateTime"] <= 0 || auction["startDateTime"] <= date_time_now) {
-            log.warn(`auctions.controller.create: bad start date ${JSON.stringify(auction)}`);
+        if (!listing["startDateTime"] || listing["startDateTime"] <= 0 || listing["startDateTime"] <= date_time_now) {
+            log.warn(`listings.controller.create: bad start date ${JSON.stringify(listing)}`);
             return res.sendStatus(400);
         }
 
-        if (auction["startDateTime"] >= auction["endDateTime"]) {
-            log.warn(`auctions.controller.create: start date must be before end ${JSON.stringify(auction)}`);
+        if (listing["startDateTime"] >= listing["endDateTime"]) {
+            log.warn(`listings.controller.create: start date must be before end ${JSON.stringify(listing)}`);
             return res.sendStatus(400);
         }
 
@@ -77,16 +77,16 @@ exports.create = function (req, res) {
 
         users.getIdFromToken(token, function (err, user_id) {
             if (err) {
-                log.warn(`auctions.controller.create: couldn't get id from token: ${err}`);
+                log.warn(`listings.controller.create: couldn't get id from token: ${err}`);
                 return res.sendStatus(400);
             }
 
-            auctions.insert(auction, user_id, function (err, id) {
+            listings.insert(listing, user_id, function (err, id) {
                 if (err) {
-                    log.warn(`auctions.controller.create: couldn't create ${JSON.stringify(auction)}: ${err}`);
+                    log.warn(`listings.controller.create: couldn't create ${JSON.stringify(listing)}: ${err}`);
                     return res.sendStatus(400); // duplicate record
                 }
-                log.warn(`auctions.controller.create: created successfully ${JSON.stringify(auction)}`);
+                log.warn(`listings.controller.create: created successfully ${JSON.stringify(listing)}`);
                 res.status(201).json({id: id});
             });
 
@@ -95,15 +95,15 @@ exports.create = function (req, res) {
 }
 
 /**
- * Get all bids for a given auction
+ * Get all bids for a given listing
  */
 exports.get_bids = function (req, res) {
-    let auction_id = parseInt(req.params.id);
-    if (!validator.isValidId(auction_id)) return res.sendStatus(404);
+    let listing_id = parseInt(req.params.id);
+    if (!validator.isValidId(listing_id)) return res.sendStatus(404);
 
-    auctions.getBids(auction_id, function (err, results) {
+    listings.getBids(listing_id, function (err, results) {
         if (err) {
-            log.warn(`auctions.controller.get_bids: model returned error: ${err}`);
+            log.warn(`listings.controller.get_bids: model returned error: ${err}`);
             return res.sendStatus(500);
         }
 
@@ -112,7 +112,7 @@ exports.get_bids = function (req, res) {
 }
 
 /**
- * Add a bid for an auction
+ * Add a bid for a listing
  *
  * (must be authenticated)
  */
@@ -120,42 +120,42 @@ exports.add_bid = function (req, res) {
     let date_time_now = (new Date).getTime();
 
 
-    let auction_id = parseInt(req.params.id);
-    if (!validator.isValidId(auction_id)) return res.sendStatus(404);
+    let listing_id = parseInt(req.params.id);
+    if (!validator.isValidId(listing_id)) return res.sendStatus(404);
 
     let amount = parseInt(req.query.amount);
     if (!validator.isValidId(amount)) return res.sendStatus(400);
 
 
-    auctions.getOne(auction_id, function (err, results) {
+    listings.getOne(listing_id, function (err, results) {
         if (err) return res.sendStatus(404);
 
         if (!results || results.length != 1) return res.sendStatus(400);
 
         let result = results[0];
 
-        let end_date_time = Date.parse(result['auction_endingdate']);
-        let start_date_time = Date.parse(result['auction_startingdate']);
+        let end_date_time = Date.parse(result['listing_endingdate']);
+        let start_date_time = Date.parse(result['listing_startingdate']);
 
-        let starting_amount = result['auction_startingprice'];
+        let starting_amount = result['listing_startingprice'];
 
         console.log("*************");
-        console.log("end_date", result['auction_endingdate'], end_date_time);
+        console.log("end_date", result['listing_endingdate'], end_date_time);
         console.log("now", date_time_now);
         let iso_time = new Date().toISOString();
         console.log("iso_time", iso_time, Date.parse(iso_time));
         console.log("*************");
 
         if (start_date_time >= date_time_now) {
-            log.warn(`auctions.controller.add_bids: adding bid before start date: ${result['auction_startingdate']}`);
+            log.warn(`listings.controller.add_bids: adding bid before start date: ${result['listing_startingdate']}`);
             return res.sendStatus(400);
         } else if (end_date_time <= date_time_now) {
-            log.warn(`auctions.controller.add_bids: adding bid after end date: ${result['auction_endingdate']}`);
+            log.warn(`listings.controller.add_bids: adding bid after end date: ${result['listing_endingdate']}`);
             return res.sendStatus(400);
         } else {
-            auctions.getBids(auction_id, function (err, current_bids) {
+            listings.getBids(listing_id, function (err, current_bids) {
                 if (err) {
-                    log.warn(`auctions.controller.get_bids: model returned error: ${err}`);
+                    log.warn(`listings.controller.get_bids: model returned error: ${err}`);
                     return res.sendStatus(500);
                 }
 
@@ -172,20 +172,20 @@ exports.add_bid = function (req, res) {
                 }
 
                 if (amount <= max_bid || amount <= starting_amount) {
-                    log.warn(`auctions.controller.add_bids: bid is less than or equal to current amount`);
+                    log.warn(`listings.controller.add_bids: bid is less than or equal to current amount`);
                     res.sendStatus(400);
                 } else {
                     let token = req.get(config.get('authToken'));
 
                     users.getIdFromToken(token, function (err, user_id) {
                         if (err) {
-                            log.warn(`auctions.controller.add_bid: couldn't get id from token: ${err}`);
+                            log.warn(`listings.controller.add_bid: couldn't get id from token: ${err}`);
                             return res.sendStatus(400);
                         }
 
-                        auctions.addBid(auction_id, user_id, amount, function (err, results) {
+                        listings.addBid(listing_id, user_id, amount, function (err, results) {
                             if (err) {
-                                log.warn(`auctions.controller.get_bids: model returned error: ${err}`);
+                                log.warn(`listings.controller.get_bids: model returned error: ${err}`);
                                 return res.sendStatus(500);
                             }
 
@@ -202,16 +202,16 @@ exports.add_bid = function (req, res) {
 
 
 /**
- * Get a single auction
+ * Get a single listing
  */
 exports.get_one = function (req, res) {
-    let auction_id = parseInt(req.params.id);
-    if (!validator.isValidId(auction_id)) return res.sendStatus(404);
+    let listing_id = parseInt(req.params.id);
+    if (!validator.isValidId(listing_id)) return res.sendStatus(404);
 
 
-    auctions.getOne(auction_id, function (err, results) {
+    listings.getOne(listing_id, function (err, results) {
         if (err) {
-            log.warn(`auctions.controller.get_one: model returned err: ${err}`);
+            log.warn(`listings.controller.get_one: model returned err: ${err}`);
             return res.sendStatus(500);
         } else if (!results) {
             return res.sendStatus(404);
@@ -221,26 +221,26 @@ exports.get_one = function (req, res) {
             let result = results[0];
 
             let temp_result = {
-                "categoryId": result['auction_categoryid'],
+                "categoryId": result['listing_categoryid'],
                 "categoryTitle": result['category_title'],
-                "title": result['auction_title'],
-                "reservePrice": result['auction_reserveprice'],
-                "startDateTime": Date.parse(result['auction_startingdate']),
-                "endDateTime": Date.parse(result['auction_endingdate']),
-                "description": result['auction_description'],
-                "creationDateTime": Date.parse(result['auction_creationdate']),
+                "title": result['listing_title'],
+                "reservePrice": result['listing_reserveprice'],
+                "startDateTime": Date.parse(result['listing_startingdate']),
+                "endDateTime": Date.parse(result['listing_endingdate']),
+                "description": result['listing_description'],
+                "creationDateTime": Date.parse(result['listing_creationdate']),
                 "seller": {
-                    "id": result['auction_userid'],
+                    "id": result['listing_userid'],
                     "username": result['user_username']
                 },
-                "startingBid": result['auction_startingprice']
+                "startingBid": result['listing_startingprice']
             };
 
             //console.log(temp_result);
 
-            auctions.getBids(auction_id, function (err, current_bids) {
+            listings.getBids(listing_id, function (err, current_bids) {
                 if (err) {
-                    log.warn(`auctions.controller.get_bids: model returned error: ${err}`);
+                    log.warn(`listings.controller.get_bids: model returned error: ${err}`);
                     return res.sendStatus(500);
                 } else {
                     if (current_bids && current_bids.length > 0) {
@@ -278,24 +278,24 @@ exports.get_one = function (req, res) {
 
 
 /**
- * Update an auction
+ * Update a listing
  */
 exports.update = function (req, res) {
-    let auction_id = parseInt(req.params.id);
-    if (!validator.isValidId(auction_id)) return res.sendStatus(404);
+    let listing_id = parseInt(req.params.id);
+    if (!validator.isValidId(listing_id)) return res.sendStatus(404);
 
     let token = req.get(config.get('authToken'));
-    console.log('Update auction=', token);
+    console.log('Update listing=', token);
     users.getIdFromToken(token, function (err, _id) {
 
-        if (!validator.isValidSchema(req.body, 'components.schemas.Auction')) {
-            log.warn(`users.controller.update: bad auction ${JSON.stringify(req.body)}`);
+        if (!validator.isValidSchema(req.body, 'components.schemas.Listing')) {
+            log.warn(`users.controller.update: bad listing ${JSON.stringify(req.body)}`);
             return res.sendStatus(400);
         }
 
-        auctions.getOne(auction_id, function (err, results) {
+        listings.getOne(listing_id, function (err, results) {
             if (err) {
-                log.warn(`auctions.controller.update: model returned err: ${err}`);
+                log.warn(`listings.controller.update: model returned err: ${err}`);
                 return res.sendStatus(500);
             } else if (!results) {
                 return res.sendStatus(404);
@@ -303,7 +303,7 @@ exports.update = function (req, res) {
 
                 let result = results[0];
 
-                let user_id = results[0]['auction_userid'];
+                let user_id = results[0]['listing_userid'];
 
                 if (_id !== user_id) {
                     console.log('user_id=', user_id, ' and user_id=', _id);
@@ -312,11 +312,11 @@ exports.update = function (req, res) {
 
                 //get time now and start time
                 let time_now = Date.now();
-                let auction_start_time = Date.parse(result['auction_startingdate']);
+                let listing_start_time = Date.parse(result['listing_startingdate']);
 
-                if (auction_start_time < time_now) {
+                if (listing_start_time < time_now) {
                     res.status(403);
-                    //res.statusText('Forbidden - bidding has begun on the auction.');
+                    //res.statusText('Forbidden - bidding has begun on the listing.');
                     res.send();
                 } else {
                     //do the update
@@ -331,46 +331,46 @@ exports.update = function (req, res) {
                     if (req.body.hasOwnProperty('categoryId')) {
                         category_id = req.body['categoryId'];
                     } else {
-                        category_id = result['auction_categoryid'];
+                        category_id = result['listing_categoryid'];
                     }
 
                     if (req.body.hasOwnProperty('title')) {
                         title = req.body['title'];
                     } else {
-                        title = result['auction_title'];
+                        title = result['listing_title'];
                     }
 
                     if (req.body.hasOwnProperty('reservePrice')) {
                         reserve_price = req.body['reservePrice'];
                     } else {
-                        reserve_price = result['auction_reserveprice'];
+                        reserve_price = result['listing_reserveprice'];
                     }
 
                     if (req.body.hasOwnProperty('startDateTime')) {
                         start_date_time = req.body['startDateTime'];
                     } else {
-                        start_date_time = Date.parse(result['auction_startingdate']);
+                        start_date_time = Date.parse(result['listing_startingdate']);
                     }
 
                     if (req.body.hasOwnProperty('endDateTime')) {
                         end_date_time = req.body['endDateTime'];
                     } else {
-                        end_date_time = Date.parse(result['auction_endingdate']);
+                        end_date_time = Date.parse(result['listing_endingdate']);
                     }
 
                     if (req.body.hasOwnProperty('description')) {
                         description = req.body['description'];
                     } else {
-                        description = result['auction_description'];
+                        description = result['listing_description'];
                     }
 
                     if (req.body.hasOwnProperty('startingBid')) {
                         starting_bid = req.body['startingBid'];
                     } else {
-                        starting_bid = result['auction_startingprice'];
+                        starting_bid = result['listing_startingprice'];
                     }
 
-                    let auction = {
+                    let listing = {
                         "category_id": category_id,
                         "title": title,
                         "reserve_price": reserve_price,
@@ -380,15 +380,15 @@ exports.update = function (req, res) {
                         "starting_bid": starting_bid
                     };
 
-                    auctions.alter(auction_id, auction, function (err) {
+                    listings.alter(listing_id, listing, function (err) {
                         if (err) {
-                            console.log(auction);
+                            console.log(listing);
                             console.log(err)
                             return res.sendStatus(500);
                         }
 
-                        console.log('Update auction: invalid end date');
-                        console.log(auction);
+                        console.log('Update listing: invalid end date');
+                        console.log(listing);
 
                         return res.sendStatus(201);
                     })
@@ -400,15 +400,15 @@ exports.update = function (req, res) {
 }
 
 /**
- * Get a photo for an auction
+ * Get a photo for a listing
  */
 exports.list_photos = function (req, res) {
-    let auction_id = parseInt(req.params.id);
-    if (!validator.isValidId(auction_id)) return res.sendStatus(404);
+    let listing_id = parseInt(req.params.id);
+    if (!validator.isValidId(listing_id)) return res.sendStatus(404);
 
     // Check file exists
-    let check_path_jpeg = app_dir + "/uploads/" + auction_id + ".jpeg"
-    let check_path_png = app_dir + "/uploads/" + auction_id + ".png"
+    let check_path_jpeg = app_dir + "/uploads/" + listing_id + ".jpeg"
+    let check_path_png = app_dir + "/uploads/" + listing_id + ".png"
 
     let default_path = app_dir + "/uploads/default.png"
 
@@ -445,26 +445,26 @@ exports.list_photos = function (req, res) {
 }
 
 /**
- * Post a photo for an auction
+ * Post a photo for a listing
  */
 exports.add_photo = function (req, res) {
-    let auction_id = parseInt(req.params.id);
-    if (!validator.isValidId(auction_id)) return res.sendStatus(404);
+    let listing_id = parseInt(req.params.id);
+    if (!validator.isValidId(listing_id)) return res.sendStatus(404);
 
     let token = req.get(config.get('authToken'));
     users.getIdFromToken(token, function (err, _id) {
-        auctions.getOne(auction_id, function (err, results) {
+        listings.getOne(listing_id, function (err, results) {
             if (err) {
-                log.warn(`auctions.controller.add_photo: model returned err: ${err}`);
+                log.warn(`listings.controller.add_photo: model returned err: ${err}`);
                 return res.sendStatus(500);
             } else if (!results) {
                 return res.sendStatus(404);
-            } else if (results[0]['auction_startingdate'] <= (new Date).getTime()) {
-                log.warn(`auctions.controller.add_photo: cant update after start date`);
+            } else if (results[0]['listing_startingdate'] <= (new Date).getTime()) {
+                log.warn(`listings.controller.add_photo: cant update after start date`);
                 return res.sendStatus(400);
             } else {
                 let result = results[0];
-                let owner_id = result['auction_userid']
+                let owner_id = result['listing_userid']
 
                 if (_id !== owner_id) {
                     return res.sendStatus(403);
@@ -486,25 +486,25 @@ exports.add_photo = function (req, res) {
                         console.log('file_ext is empty')
                     }
                     ;
-                    console.log('add_photo:', auction_id + file_ext, 'user_id', owner_id);
+                    console.log('add_photo:', listing_id + file_ext, 'user_id', owner_id);
 
-                    let check_path_jpeg = "./uploads/" + auction_id + ".jpeg"
-                    let check_path_png = "./uploads/" + auction_id + ".png"
+                    let check_path_jpeg = "./uploads/" + listing_id + ".jpeg"
+                    let check_path_png = "./uploads/" + listing_id + ".png"
 
                     try {
                         fs.unlink(check_path_jpeg, function (err) {
                             if (err) {
                                 fs.unlink(check_path_png, function (err) {
                                     if (err) {
-                                        log.warn(`auctions.controller.add_photo: unlinking existing file returned: ${err}`);
+                                        log.warn(`listings.controller.add_photo: unlinking existing file returned: ${err}`);
                                     }
 
-                                    req.pipe(fs.createWriteStream('./uploads/' + auction_id + '.' + file_ext));
+                                    req.pipe(fs.createWriteStream('./uploads/' + listing_id + '.' + file_ext));
                                     res.sendStatus(201);
 
                                 });
                             } else {
-                                req.pipe(fs.createWriteStream('./uploads/' + auction_id + '.' + file_ext));
+                                req.pipe(fs.createWriteStream('./uploads/' + listing_id + '.' + file_ext));
                                 res.sendStatus(201);
                             }
                         });
@@ -521,36 +521,36 @@ exports.add_photo = function (req, res) {
 }
 
 /**
- * Delete an auctions photo
+ * Delete a listings photo
  */
 exports.delete_photo = function (req, res) {
-    let auction_id = parseInt(req.params.id);
-    if (!validator.isValidId(auction_id)) return res.sendStatus(404);
+    let listing_id = parseInt(req.params.id);
+    if (!validator.isValidId(listing_id)) return res.sendStatus(404);
 
     let token = req.get(config.get('authToken'));
     users.getIdFromToken(token, function (err, _id) {
-        auctions.getOne(auction_id, function (err, results) {
+        listings.getOne(listing_id, function (err, results) {
             if (err) {
-                log.warn(`auctions.controller.get_one: model returned err: ${err}`);
+                log.warn(`listings.controller.get_one: model returned err: ${err}`);
                 return res.sendStatus(500);
             } else if (!results || results.length == 0) {
                 return res.sendStatus(404);
             } else {
                 let result = results[0];
                 log.warn(result);
-                let owner_id = result['auction_userid']
+                let owner_id = result['listing_userid']
 
                 if (_id !== owner_id) {
                     return res.sendStatus(403);
                 } else {
-                    let check_path_jpeg = "./uploads/" + auction_id + ".jpeg"
-                    let check_path_png = "./uploads/" + auction_id + ".png"
+                    let check_path_jpeg = "./uploads/" + listing_id + ".jpeg"
+                    let check_path_png = "./uploads/" + listing_id + ".png"
 
                     fs.unlink(check_path_jpeg, function (err) {
                         if (err) {
                             fs.unlink(check_path_png, function (err) {
                                 if (err) {
-                                    log.warn(`auctions.controller.delete_photo: unlinking file returned: ${err}`);
+                                    log.warn(`listings.controller.delete_photo: unlinking file returned: ${err}`);
                                     res.sendStatus(500);
                                 } else {
                                     res.sendStatus(201);
@@ -571,9 +571,9 @@ exports.delete_photo = function (req, res) {
  */
 exports.get_categories = function (req, res) {
     console.log("getting categories...");
-    auctions.getCategories(function (err, results) {
+    listings.getCategories(function (err, results) {
         if (err) {
-            log.warn(`auctions.controller.get_categories: model returned error: ${err}`);
+            log.warn(`listings.controller.get_categories: model returned error: ${err}`);
             return res.sendStatus(500);
         } else {
             return res.status(200).json(results);
@@ -582,17 +582,17 @@ exports.get_categories = function (req, res) {
 }
 
 /**
- Get auctions that the logged in user has won
+ Get listings that the logged in user has won
  */
-exports.get_won_auctions = function (req, res) {
+exports.get_won_listings = function (req, res) {
     let token = req.get(config.get('authToken'));
     users.getIdFromToken(token, function (err, user_id) {
         if (err) {
-            log.warn(`auctions.controller.get_won_auctions: couldn't get id from token: ${err}`);
+            log.warn(`listings.controller.get_won_listings: couldn't get id from token: ${err}`);
             return res.sendStatus(400);
         } else {
 
-            auctions.getWonAuctions(user_id, function (err, results) {
+            listings.getWonListings(user_id, function (err, results) {
                 if (err || !results) {
                     return res.sendStatus(400);
                 }
@@ -600,7 +600,7 @@ exports.get_won_auctions = function (req, res) {
                 if (results.length == 0) {
                     return res.status(200).json(results);
                 } else {
-                    if (!validator.isValidSchema(results, 'components.schemas.auctionsOverview')) {
+                    if (!validator.isValidSchema(results, 'components.schemas.listingsOverview')) {
                         log.warn(JSON.stringify(results, null, 2));
                         log.warn(validator.getLastErrors());
                         return res.sendStatus(500);

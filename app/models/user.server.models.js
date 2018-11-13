@@ -19,7 +19,7 @@ const insert = function (user, done) {
     let values = [[user.username, user.givenName, user.familyName, user.email, hash, salt.toString('hex')]];
 
     db.get_pool().query(
-        'INSERT INTO auction_user (user_username, user_givenname, user_familyname, user_email, user_password, user_salt) VALUES (?)',
+        'INSERT INTO listing_user (user_username, user_givenname, user_familyname, user_email, user_password, user_salt) VALUES (?)',
         values,
         function (err, results) {
             if (err) return done(err);
@@ -35,7 +35,7 @@ const insert = function (user, done) {
 const authenticate = function (username, email, password, done) {
     //console.log(username, email, password);
     db.get_pool().query(
-        'SELECT user_id, user_password, user_salt FROM auction_user WHERE (user_username=? OR user_email=?)',
+        'SELECT user_id, user_password, user_salt FROM listing_user WHERE (user_username=? OR user_email=?)',
         [username, email],
         function (err, results) {
 
@@ -77,7 +77,7 @@ const authenticate = function (username, email, password, done) {
  */
 const getToken = function (id, done) {
     db.get_pool().query(
-        'SELECT user_token FROM auction_user WHERE user_id=?',
+        'SELECT user_token FROM listing_user WHERE user_id=?',
         [id],
         function (err, results) {
             if (results.length === 1 && results[0].token)
@@ -93,7 +93,7 @@ const getToken = function (id, done) {
 const setToken = function (id, done) {
     let token = crypto.randomBytes(16).toString('hex');
     db.get_pool().query(
-        'UPDATE auction_user SET user_token=? WHERE user_id=?',
+        'UPDATE listing_user SET user_token=? WHERE user_id=?',
         [token, id],
         function (err) {
             return done(err, token)
@@ -107,7 +107,7 @@ const setToken = function (id, done) {
  */
 const removeToken = (token, done) => {
     db.get_pool().query(
-        'UPDATE auction_user SET user_token=null WHERE user_token=?',
+        'UPDATE listing_user SET user_token=null WHERE user_token=?',
         [token],
         function (err) {
             return done(err)
@@ -123,7 +123,7 @@ const removeToken = (token, done) => {
  */
 const getOne = (id, done) => {
 
-    let query = 'SELECT user_username AS username, user_givenname AS givenName, user_familyname AS familyName, user_email AS email, user_accountbalance AS accountBalance FROM auction_user WHERE user_id=?';
+    let query = 'SELECT user_username AS username, user_givenname AS givenName, user_familyname AS familyName, user_email AS email, user_accountbalance AS accountBalance FROM listing_user WHERE user_id=?';
     db.get_pool().query(
         query,
         [id],
@@ -144,7 +144,7 @@ const getIdFromToken = function (token, done) {
         return done(true, null);
     else {
         db.get_pool().query(
-            'SELECT user_id FROM auction_user WHERE user_token=?',
+            'SELECT user_id FROM listing_user WHERE user_token=?',
             [token],
             function (err, result) {
                 if (result.length === 1)
@@ -168,10 +168,10 @@ const alter = function (id, user, done) {
         const salt = crypto.randomBytes(64);
         const hash = getHash(user.password, salt);
 
-        query_string = 'UPDATE auction_user SET user_username=?, user_givenname=?, user_familyname=?, user_email=?, user_password=?, user_salt=? WHERE user_id=?';
+        query_string = 'UPDATE listing_user SET user_username=?, user_givenname=?, user_familyname=?, user_email=?, user_password=?, user_salt=? WHERE user_id=?';
         values = [user.username, user.givenName, user.familyName, user.email, hash, salt.toString('hex'), id];
     } else {
-        query_string = 'UPDATE auction_user SET user_username=?, user_givenname=?, user_familyname=?, user_email=? WHERE user_id=?';
+        query_string = 'UPDATE listing_user SET user_username=?, user_givenname=?, user_familyname=?, user_email=? WHERE user_id=?';
         values = [user.username, user.givenName, user.familyName, user.email, id];
     }
 

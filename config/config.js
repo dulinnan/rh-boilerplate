@@ -8,7 +8,7 @@ let config = convict({
     },
     basepath: {
         format: String,
-        default: '/api/',
+        default: '/api/v1/',
         arg: 'basepath',
     },
     authToken: {

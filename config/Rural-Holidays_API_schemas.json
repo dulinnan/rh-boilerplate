@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "servers": [
     {
-      "url": "/api"
+      "url": "/api/v1"
     }
   ],
   "info": {
@@ -17,7 +17,7 @@
     },
     {
       "name": "photos",
-      "description": "Manipulation of the photos for an listing"
+      "description": "Manipulation of the photos for a listing"
     },
     {
       "name": "users",
@@ -536,7 +536,7 @@
         "tags": [
           "photos"
         ],
-        "summary": "Add a photo to an listing",
+        "summary": "Add a photo to a listing",
         "security": [
           {
             "User": []
@@ -581,7 +581,7 @@
         "tags": [
           "photos"
         ],
-        "summary": "Delete a photo to an listing",
+        "summary": "Delete a photo to a listing",
         "security": [
           {
             "User": []

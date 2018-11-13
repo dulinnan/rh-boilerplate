@@ -8,16 +8,16 @@ VALUES
 ;
 
 
-INSERT INTO auction (
-auction_title,
-auction_categoryid,
-auction_description,
-auction_reserveprice,
-auction_startingprice,
-auction_creationdate,
-auction_startingdate,
-auction_endingdate,
-auction_userid)
+INSERT INTO listing (
+listing_title,
+listing_categoryid,
+listing_description,
+listing_reserveprice,
+listing_startingprice,
+listing_creationdate,
+listing_startingdate,
+listing_endingdate,
+listing_userid)
 VALUES
 ('Five (5) infinity stones','5','The Infinity Stones are six immensely powerful objects tied to different aspects of the universe, created by the Cosmic Entities.','100000', '90000','1970-01-01','1970-01-02','2049-12-31','10'),
 ('One (1) Green Arrow' ,'2','One mystic arrow from the armoury of The Green Arrow' ,'1000','1000', '2018-04-24', '2018-04-24', '2018-05-30' ,'8'),
@@ -43,7 +43,7 @@ VALUES
 
 INSERT INTO bid (
   bid_userid,
-  bid_auctionid,
+  bid_listingid,
   bid_amount,
   bid_datetime)
 values

@@ -6,13 +6,13 @@
 
 DROP TABLE IF EXISTS bid;
 DROP TABLE IF EXISTS photo;
-DROP TABLE IF EXISTS auction;
+DROP TABLE IF EXISTS listing;
 DROP TABLE IF EXISTS category;
-DROP TABLE IF EXISTS auction_user;
+DROP TABLE IF EXISTS listing_user;
 
 # Tables must be created in a particular order due to referential constraints i.e. foreign keys.
 
-CREATE TABLE auction_user (
+CREATE TABLE listing_user (
   user_id int(10) NOT NULL AUTO_INCREMENT,
   user_username varchar(50) NOT NULL,
   user_givenname varchar(50) NOT NULL,
@@ -38,45 +38,45 @@ CREATE TABLE category (
   UNIQUE KEY category_id (category_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE auction (
-  auction_id int(10) NOT NULL AUTO_INCREMENT,
-  auction_title varchar(128) NOT NULL,
-  auction_categoryid int(10) NOT NULL,
-  auction_description varchar(512) DEFAULT NULL,
-  auction_reserveprice int(10) DEFAULT NULL,
-  auction_startingprice int(10) NOT NULL,
-  auction_creationdate datetime NOT NULL,
-  auction_startingdate datetime NOT NULL,
-  auction_endingdate datetime NOT NULL,
-  auction_userid int(10) NOT NULL,
-  auction_primaryphoto_URI varchar(128) DEFAULT NULL,
-  auction_deactivated tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (auction_id),
-  KEY fk_auction_category_id (auction_categoryid),
-  KEY fk_auction_userid (auction_userid),
-  CONSTRAINT fk_auction_userid FOREIGN KEY (auction_userid) REFERENCES auction_user (user_id),
-  CONSTRAINT fk_auction_category_id FOREIGN KEY (auction_categoryid) REFERENCES category (category_id)
+CREATE TABLE listing (
+  listing_id int(10) NOT NULL AUTO_INCREMENT,
+  listing_title varchar(128) NOT NULL,
+  listing_categoryid int(10) NOT NULL,
+  listing_description varchar(512) DEFAULT NULL,
+  listing_reserveprice int(10) DEFAULT NULL,
+  listing_startingprice int(10) NOT NULL,
+  listing_creationdate datetime NOT NULL,
+  listing_startingdate datetime NOT NULL,
+  listing_endingdate datetime NOT NULL,
+  listing_userid int(10) NOT NULL,
+  listing_primaryphoto_URI varchar(128) DEFAULT NULL,
+  listing_deactivated tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (listing_id),
+  KEY fk_listing_category_id (listing_categoryid),
+  KEY fk_listing_userid (listing_userid),
+  CONSTRAINT fk_listing_userid FOREIGN KEY (listing_userid) REFERENCES listing_user (user_id),
+  CONSTRAINT fk_listing_category_id FOREIGN KEY (listing_categoryid) REFERENCES category (category_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE photo (
   photo_id int(10) NOT NULL AUTO_INCREMENT,
-  photo_auctionid int(10) NOT NULL,
+  photo_listingid int(10) NOT NULL,
   photo_image_URI varchar(128) NOT NULL,
   photo_displayorder int NULL,
   PRIMARY KEY (photo_id),
-  KEY fk_photo_auctionid (photo_auctionid),
-  CONSTRAINT fk_photo_auctionid FOREIGN KEY (photo_auctionid) REFERENCES auction (auction_id)
+  KEY fk_photo_listingid (photo_listingid),
+  CONSTRAINT fk_photo_listingid FOREIGN KEY (photo_listingid) REFERENCES listing (listing_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE bid (
   bid_id int(10) NOT NULL AUTO_INCREMENT,
   bid_userid int(10) NOT NULL,
-  bid_auctionid int(10) NOT NULL,
+  bid_listingid int(10) NOT NULL,
   bid_amount int(10) NOT NULL,
   bid_datetime datetime NOT NULL,
   PRIMARY KEY (bid_id),
   KEY fk_bid_userid (bid_userid),
-  KEY fk_auctionid (bid_auctionid),
-  CONSTRAINT fk_auctionid FOREIGN KEY (bid_auctionid) REFERENCES auction (auction_id),
-  CONSTRAINT fk_bid_userid FOREIGN KEY (bid_userid) REFERENCES auction_user (user_id)
+  KEY fk_listingid (bid_listingid),
+  CONSTRAINT fk_listingid FOREIGN KEY (bid_listingid) REFERENCES listing (listing_id),
+  CONSTRAINT fk_bid_userid FOREIGN KEY (bid_userid) REFERENCES listing_user (user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
