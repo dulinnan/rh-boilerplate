@@ -67,15 +67,16 @@
                 <div class="about-text text-center mb-100">
                   <div class="section-heading text-center">
                     <div class="line-"/>
-                    <h2>A place to remember</h2>
+                    <h2>Kia Ora, Hello and welcome to New Zealand</h2>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
-                    sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                  <p>Rural Holidays is New Zealand's leading provider of quality hosted farm stays, country home stays
+                    and holiday accommodation.
+                    We look forward to making your New Zealand farmstay holiday a special experience with memories that
+                    will last a life time. </p>
                   <div class="about-key-text">
-                    <h6><span class="iconfont icon-check"/> Donec malesuada lorem maximus mauris sceleri</h6>
-                    <h6><span class="iconfont icon-check"/> Malesuada lorem maximus mauris sceleri</h6>
-                    <h6><span class="iconfont icon-check"/> At vero eos et accusamus et iusto odio dignissimos</h6>
+                    <h6><span class="iconfont icon-check"/>Premium Accommodation Provider</h6>
+                    <h6><span class="iconfont icon-check"/>Extensive Network of over 300 Farmstays</h6>
+                    <h6><span class="iconfont icon-check"/>New Zealand Owned and Operated since 1986</h6>
                   </div>
                   <a
                     href="#"

@@ -7,7 +7,7 @@
   ],
   "info": {
     "description": "",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "title": "API for Rural Holidays backend"
   },
   "tags": [
@@ -21,7 +21,11 @@
     },
     {
       "name": "users",
-      "description": "Users of the listing server that can be sellers and buyers"
+      "description": "Admin users"
+    },
+    {
+      "name": "contacts",
+      "description": "Clients  of the business"
     }
   ],
   "paths": {
@@ -107,8 +111,8 @@
           },
           {
             "in": "query",
-            "name": "seller",
-            "description": "Only return listings with this id as a seller",
+            "name": "region-id",
+            "description": "ID for the region.",
             "schema": {
               "type": "integer",
               "minimum": 0
@@ -116,17 +120,8 @@
           },
           {
             "in": "query",
-            "name": "bidder",
-            "description": "Only return listings which have a bid by this id",
-            "schema": {
-              "type": "integer",
-              "minimum": 0
-            }
-          },
-          {
-            "in": "query",
-            "name": "winner",
-            "description": "Only return listings which were won by this id",
+            "name": "host",
+            "description": "Only return listings with this id as a host",
             "schema": {
               "type": "integer",
               "minimum": 0
@@ -135,7 +130,7 @@
           {
             "in": "query",
             "name": "status",
-            "description": "Return listings with a certain status. Can be 'all', 'active', 'expired', 'upcoming' or 'won'",
+            "description": "Return listings with a certain status. Can be 'all', 'active', 'expired' or 'upcoming'",
             "schema": {
               "type": "string"
             }
@@ -176,12 +171,13 @@
               "schema": {
                 "required": [
                   "title",
+                  "rhCode",
+                  "location",
+                  "regionCode",
+                  "hostId",
                   "categoryId",
                   "description",
-                  "startDateTime",
-                  "endDateTime",
-                  "reservePrice",
-                  "startingBid"
+                  "reservePrice"
                 ],
                 "allOf": [
                   {
@@ -191,19 +187,22 @@
                     "$ref": "#/components/schemas/title"
                   },
                   {
+                    "$ref": "#/components/schemas/rhCode"
+                  },
+                  {
+                    "$ref": "#/components/schemas/location"
+                  },
+                  {
+                    "$ref": "#/components/schemas/regionCode"
+                  },
+                  {
+                    "$ref": "#/components/schemas/hostId"
+                  },
+                  {
                     "$ref": "#/components/schemas/description"
                   },
                   {
-                    "$ref": "#/components/schemas/startDateTime"
-                  },
-                  {
-                    "$ref": "#/components/schemas/endDateTime"
-                  },
-                  {
                     "$ref": "#/components/schemas/reservePrice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/startingBid"
                   }
                 ]
               }
@@ -315,16 +314,22 @@
                     "$ref": "#/components/schemas/description"
                   },
                   {
-                    "$ref": "#/components/schemas/startDateTime"
+                    "$ref": "#/components/schemas/rhCode"
                   },
                   {
-                    "$ref": "#/components/schemas/endDateTime"
+                    "$ref": "#/components/schemas/location"
+                  },
+                  {
+                    "$ref": "#/components/schemas/regionCode"
+                  },
+                  {
+                    "$ref": "#/components/schemas/listingExtras"
+                  },
+                  {
+                    "$ref": "#/components/schemas/listingConfig"
                   },
                   {
                     "$ref": "#/components/schemas/reservePrice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/startingBid"
                   }
                 ]
               }
@@ -342,117 +347,11 @@
           "401": {
             "description": "Unauthorized."
           },
-          "403": {
-            "description": "Forbidden - bidding has begun on the listing."
-          },
           "404": {
             "description": "Not found."
           },
           "500": {
             "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/listings/{id}/bids": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "description": "listing id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ],
-      "get": {
-        "tags": [
-          "listings"
-        ],
-        "summary": "View bid history",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/bidHistory"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "listings"
-        ],
-        "summary": "Make bid on listing",
-        "security": [
-          {
-            "User": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "amount",
-            "description": "amount to bid",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal server error."
-          }
-        }
-      }
-    },
-    "/my_won_listings": {
-      "get": {
-        "tags": [
-          "listings"
-        ],
-        "summary": "Get listings that have been won by the currently logged in user.",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/listingsOverview"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "500": {
-            "description": "Internal server error."
           }
         }
       }
@@ -470,6 +369,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/getCategories"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/regions": {
+      "get": {
+        "tags": [
+          "listings"
+        ],
+        "summary": "Get all regions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getRegions"
                 }
               }
             }
@@ -734,18 +659,221 @@
         }
       }
     },
-    "/users": {
+    "/contacts": {
+      "get": {
+        "tags": [
+          "contacts"
+        ],
+        "security": [
+          {
+            "User": []
+          }
+        ],
+        "summary": "Searching users on their names, email or company",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "description": "Search string for names, email or company",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/contact"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
       "post": {
         "tags": [
-          "users"
+          "contacts"
         ],
-        "summary": "Create user",
+        "security": [
+          {
+            "User": []
+          }
+        ],
+        "summary": "Create contact",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "required": [
-                  "username",
+                  "familyName",
+                  "givenName",
+                  "company",
+                  "email"
+                ],
+                "allOf": [
+                  {
+                    "properties": {
+                      "givenName": {
+                        "type": "string"
+                      },
+                      "familyName": {
+                        "type": "string"
+                      },
+                      "company": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/email"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed request"
+          }
+        }
+      }
+    },
+    "/contacts/{id}": {
+      "get": {
+        "tags": [
+          "contacts"
+        ],
+        "summary": "Get contact by contact id",
+        "security": [
+          {
+            "User": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/contact"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "contacts"
+        ],
+        "summary": "Change some selected information for a contact",
+        "description": "Only those properties included in the requestBody are to be changed.",
+        "security": [
+          {
+            "User": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id to be updated",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "givenName": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "familyName": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "company": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/email"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create admin user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
                   "familyName",
                   "givenName",
                   "email",
@@ -754,9 +882,6 @@
                 "allOf": [
                   {
                     "properties": {
-                      "username": {
-                        "type": "string"
-                      },
                       "givenName": {
                         "type": "string"
                       },
@@ -799,7 +924,7 @@
           "users"
         ],
         "summary": "Log in user by username or email",
-        "description": "One of username and email is required",
+        "description": "Email and password are required",
         "responses": {
           "200": {
             "description": "OK",
@@ -837,118 +962,6 @@
           }
         }
       }
-    },
-    "/users/{id}": {
-      "get": {
-        "tags": [
-          "users"
-        ],
-        "summary": "Get user by user id",
-        "security": [
-          {
-            "User": []
-          }
-        ],
-        "description": "Email and accountBalance properties only included if request is for own userid (noted here as OAS lacks a mechanism to describe polymorphic responses.)",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 0
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/user"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "users"
-        ],
-        "summary": "Change some selected information for a user",
-        "description": "Only those properties included in the requestBody are to be changed.",
-        "security": [
-          {
-            "User": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "user id to be updated",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 0
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "anyOf": [
-                  {
-                    "type": "object",
-                    "properties": {
-                      "username": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "givenName": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "familyName": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  {
-                    "$ref": "#/components/schemas/email"
-                  },
-                  {
-                    "$ref": "#/components/schemas/password"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -968,35 +981,23 @@
               "properties": {
                 "id": {
                   "type": "integer"
-                },
-                "categoryTitle": {
-                  "type": "string"
                 }
               }
-            },
-            {
-              "$ref": "#/components/schemas/categoryId"
             },
             {
               "$ref": "#/components/schemas/title"
             },
             {
+              "$ref": "#/components/schemas/description"
+            },
+            {
+              "$ref": "#/components/schemas/location"
+            },
+            {
+              "$ref": "#/components/schemas/region"
+            },
+            {
               "$ref": "#/components/schemas/reservePrice"
-            },
-            {
-              "$ref": "#/components/schemas/startDateTime"
-            },
-            {
-              "$ref": "#/components/schemas/endDateTime"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "currentBid": {
-                  "type": "number",
-                  "minimum": 0
-                }
-              }
             }
           ]
         }
@@ -1007,7 +1008,7 @@
         "required": [
           "id",
           "creationDateTime",
-          "seller"
+          "host"
         ],
         "allOf": [
           {
@@ -1028,43 +1029,36 @@
             "$ref": "#/components/schemas/title"
           },
           {
-            "$ref": "#/components/schemas/reservePrice"
+            "$ref": "#/components/schemas/rhCode"
           },
           {
-            "$ref": "#/components/schemas/startDateTime"
+            "$ref": "#/components/schemas/location"
           },
           {
-            "$ref": "#/components/schemas/endDateTime"
+            "$ref": "#/components/schemas/region"
           },
           {
             "$ref": "#/components/schemas/description"
           },
           {
+            "$ref": "#/components/schemas/listingExtras"
+          },
+          {
+            "$ref": "#/components/schemas/listingConfig"
+          },
+          {
             "type": "object",
             "properties": {
-              "creationDateTime": {
-                "type": "integer"
-              },
-              "seller": {
+              "host": {
                 "type": "object",
                 "properties": {
                   "id": {
                     "type": "integer"
                   },
-                  "username": {
+                  "givenName": {
                     "type": "string"
                   }
                 }
-              },
-              "startingBid": {
-                "type": "integer"
-              },
-              "currentBid": {
-                "type": "integer"
-              },
-              "bids": {
-                "description": "bid history, in datetime order, most recent first",
-                "$ref": "#/components/schemas/bidHistory"
               }
             }
           }
@@ -1073,19 +1067,15 @@
       "user": {
         "type": "object",
         "required": [
-          "username",
           "familyName",
           "givenName",
           "email",
-          "accountBalance"
+          "password"
         ],
         "allOf": [
           {
             "type": "object",
             "properties": {
-              "username": {
-                "type": "string"
-              },
               "givenName": {
                 "type": "string"
               },
@@ -1098,12 +1088,7 @@
             "$ref": "#/components/schemas/email"
           },
           {
-            "type": "object",
-            "properties": {
-              "accountBalance": {
-                "type": "integer"
-              }
-            }
+            "$ref": "#/components/schemas/password"
           }
         ]
       },
@@ -1143,33 +1128,6 @@
           }
         }
       },
-      "bidHistory": {
-        "type": "array",
-        "description": "history of bids on a listing",
-        "items": {
-          "type": "object",
-          "required": [
-            "amount",
-            "datetime",
-            "buyerId",
-            "buyerUsername"
-          ],
-          "properties": {
-            "amount": {
-              "type": "integer"
-            },
-            "datetime": {
-              "type": "integer"
-            },
-            "buyerId": {
-              "type": "integer"
-            },
-            "buyerUsername": {
-              "type": "string"
-            }
-          }
-        }
-      },
       "id": {
         "type": "object",
         "properties": {
@@ -1188,10 +1146,68 @@
           }
         }
       },
+      "hostId": {
+        "type": "object",
+        "properties": {
+          "hostId": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
       "title": {
         "type": "object",
         "properties": {
           "title": {
+            "type": "string"
+          }
+        }
+      },
+      "rhCode": {
+        "type": "object",
+        "properties": {
+          "rhCode": {
+            "type": "string"
+          }
+        }
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
+          }
+        }
+      },
+      "regionCode": {
+        "type": "object",
+        "properties": {
+          "regionCode": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "region": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string"
+          }
+        }
+      },
+      "listingExtras": {
+        "type": "object",
+        "properties": {
+          "listingExtras": {
+            "type": "string"
+          }
+        }
+      },
+      "listingConfig": {
+        "type": "object",
+        "properties": {
+          "listingConfig": {
             "type": "string"
           }
         }
@@ -1204,38 +1220,11 @@
           }
         }
       },
-      "startDateTime": {
-        "type": "object",
-        "properties": {
-          "startDateTime": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      },
-      "endDateTime": {
-        "type": "object",
-        "properties": {
-          "endDateTime": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      },
       "description": {
         "type": "object",
         "properties": {
           "description": {
             "type": "string"
-          }
-        }
-      },
-      "startingBid": {
-        "type": "object",
-        "properties": {
-          "startingBid": {
-            "type": "integer",
-            "minimum": 0
           }
         }
       },
@@ -1261,30 +1250,51 @@
         "title": "listing",
         "type": "object",
         "properties": {
-          "categoryId": {
-            "type": "integer"
-          },
           "title": {
             "type": "string"
           },
-          "description": {
+          "rhCode": {
             "type": "string"
           },
-          "startDateTime": {
-            "type": "integer",
-            "minimum": 0
+          "location": {
+            "type": "string"
           },
-          "endDateTime": {
-            "type": "integer",
-            "minimum": 0
+          "regionCode": {
+            "type": "integer"
+          },
+          "categoryId": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
           },
           "reservePrice": {
             "type": "integer",
             "minimum": 0
           },
-          "startingBid": {
-            "type": "integer",
-            "minimum": 0
+          "listingExtras": {
+            "type": "string"
+          },
+          "listingConfig": {
+            "type": "string"
+          }
+        }
+      },
+      "contact": {
+        "title": "contact",
+        "type": "object",
+        "properties": {
+          "givenName": {
+            "type": "string"
+          },
+          "familyName": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
           }
         }
       },
@@ -1292,9 +1302,6 @@
         "title": "User",
         "type": "object",
         "properties": {
-          "username": {
-            "type": "string"
-          },
           "givenName": {
             "type": "string"
           },
@@ -1317,26 +1324,28 @@
           }
         ],
         "required": [
-          "categoryId",
           "title",
+          "rhCode",
+          "location",
+          "regionCode",
+          "categoryId",
           "description",
-          "startDateTime",
-          "endDateTime",
           "reservePrice",
-          "startingBid"
+          "listingExtras",
+          "listingConfig"
         ]
       },
-      "PostUser": {
+      "PostContact": {
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/User"
+            "$ref": "#/components/schemas/contact"
           }
         ],
         "required": [
-          "username",
           "givenName",
           "familyName",
+          "company",
           "email",
           "password"
         ]
@@ -1345,9 +1354,6 @@
         "title": "LoginUser",
         "type": "object",
         "properties": {
-          "username": {
-            "type": "string"
-          },
           "email": {
             "type": "string"
           },
@@ -1356,6 +1362,7 @@
           }
         },
         "required": [
+          "email",
           "password"
         ]
       },
@@ -1380,6 +1387,34 @@
                   "type": "string"
                 },
                 "categoryDescription": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "getRegions": {
+        "title": "getRegions",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "title"
+          ],
+          "description": "summary data for a listing",
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "regionCode": {
+                  "type": "integer"
+                },
+                "regionTitle": {
+                  "type": "string"
+                },
+                "regionDescription": {
                   "type": "string"
                 }
               }

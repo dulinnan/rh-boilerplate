@@ -59,9 +59,15 @@
               <div
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdown">
-                <a
+                <router-link
+                  :to="{ name: 'listing.index' }"
                   class="dropdown-item"
-                  href="#">Our Listings</a>
+                  exact
+                >Our Listings
+                </router-link>
+                <!--<a-->
+                <!--class="dropdown-item"-->
+                <!--href="#">Our Listings</a>-->
                 <a
                   class="dropdown-item"
                   href="#">Booking Conditions</a>

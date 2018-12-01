@@ -37,27 +37,26 @@ exports.login = function (req, res) {
         log.warn(`users.controller.login: bad request ${JSON.stringify(req.body)}`);
         res.sendStatus(400);
     } else {
-        //console.log("hello");
-        //log.warn(`success ${JSON.stringify(req.body)}`);
+        // console.log("hello");
+        // log.warn(`success ${JSON.stringify(req.body)}`);
 
-        let username = '';
-        let email = '';
+        // let email = '';
+        let email = req.body.email;
         let password = req.body.password;
 
-        //res.status(200).json({username:username,email:email,password:password});
+        // res.status(200).json({email:email,password:password});
 
         //check these parameters manually as swagger doesn't allow for oneOf type semantics so email and username are given as optional
-        if (req.body.hasOwnProperty('username')) username = req.body.username;
-        if (req.body.hasOwnProperty('email')) email = req.body.email;
+        // if (req.body.hasOwnProperty('email')) email = req.body.email;
 
-        if (username == "" && email == "") {
-            res.status(400).send('Invalid username/email/password supplied');
+        if (email === "") {
+            res.status(400).send('Invalid email/password supplied');
         } else {
-            users.authenticate(username, email, password, function (err, id) {
-                //console.log(err, id);
+            users.authenticate(email, password, function (err, id) {
+                // console.log(err, id);
                 if (err) {
-                    log.warn("Here: " + err);
-                    res.status(400).send('Invalid username/email/password supplied');
+                    log.warn("Here failed: " + err);
+                    res.status(400).send('Invalid email/password supplied');
                 } else {
                     users.getToken(id, function (err, token) {
                         /// return existing token if already set (don't modify tokens)
@@ -141,17 +140,10 @@ exports.update = function (req, res) {
             // console.log(results);
             // console.log(req.body);
 
-            let username = '';
             let givenname = '';
             let familyname = '';
             let email = '';
             let password = '';
-
-            if (req.body.hasOwnProperty('username')) {
-                username = req.body.username;
-            } else {
-                username = results.username;
-            }
 
             if (req.body.hasOwnProperty('givenName')) {
                 givenname = req.body.givenName;
@@ -183,7 +175,6 @@ exports.update = function (req, res) {
 
                 if (password != '') {
                     user = {
-                        "username": username,
                         "givenName": givenname,
                         "familyName": familyname,
                         "email": email,
@@ -191,7 +182,6 @@ exports.update = function (req, res) {
                     }
                 } else {
                     user = {
-                        "username": username,
                         "givenName": givenname,
                         "familyName": familyname,
                         "email": email

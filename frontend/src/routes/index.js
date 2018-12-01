@@ -75,10 +75,18 @@ export default [
     component: () => import('@/views/Booking/Index.vue'),
   },
 
+  // Booking
+  {
+    path: '/listing',
+    name: 'listing.index',
+    component: () => import('@/views/Listing/Index.vue'),
+  },
+
   {
     path: '/*',
     redirect: '/',
   },
+
   {
     path: '/home',
     redirect: '/',
