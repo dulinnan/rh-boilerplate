@@ -34,12 +34,35 @@ export const router = new VueRouter({
 //      * an guest page, redirect to the dashboard page
 //      */
 //     next({
-//       name: 'home.index',
+//       name: 'admin.index',
 //     });
 //   } else {
 //     next();
 //   }
 // });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(m => m.meta.auth) && !sessionStorage.id_token) {
+    /*
+     * If the user is not authenticated and visits
+     * a page that requires authentication, redirect to the login page
+     */
+    next({
+      name: 'login.index',
+    });
+  } else if (to.matched.some(m => m.meta.guest) && sessionStorage.id_token) {
+    /*
+     * If the user is authenticated and visits
+     * an guest page, redirect to the dashboard page
+     */
+    next({
+      name: 'admin.index',
+    });
+  } else {
+    next();
+  }
+});
+
 
 Vue.router = router;
 

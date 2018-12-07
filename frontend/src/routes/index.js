@@ -13,9 +13,9 @@ export default [
     component: () => import('@/views/Home/Index.vue'),
 
     // If the user needs to be authenticated to view this page
-    meta: {
-      auth: true,
-    },
+    // meta: {
+    //   auth: true,
+    // },
   },
 
   // Account
@@ -25,9 +25,9 @@ export default [
     component: () => import('@/views/Account/Index.vue'),
 
     // If the user needs to be authenticated to view this page.
-    meta: {
-      auth: true,
-    },
+    // meta: {
+    //   auth: true,
+    // },
   },
 
   // Login
@@ -75,11 +75,37 @@ export default [
     component: () => import('@/views/Booking/Index.vue'),
   },
 
-  // Booking
+  // Listings
   {
-    path: '/listing',
+    path: '/listings',
+    name: 'listings.index',
+    component: () => import('@/views/Listings/Index.vue'),
+  },
+
+  // Listing
+  {
+    path: '/listings/:listingId',
     name: 'listing.index',
     component: () => import('@/views/Listing/Index.vue'),
+  },
+
+  // Mapping
+  {
+    path: '/map',
+    name: 'map.index',
+    component: () => import('@/views/Map/Index.vue'),
+  },
+
+  // Admin
+  {
+    path: '/admin',
+    name: 'admin.index',
+    component: () => import('@/views/Admin/Index.vue'),
+
+    // If the user needs to be a guest to view this page.
+    meta: {
+      auth: true,
+    },
   },
 
   {

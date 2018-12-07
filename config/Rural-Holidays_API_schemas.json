@@ -170,7 +170,6 @@
             "application/json": {
               "schema": {
                 "required": [
-                  "title",
                   "rhCode",
                   "location",
                   "regionCode",
@@ -182,9 +181,6 @@
                 "allOf": [
                   {
                     "$ref": "#/components/schemas/categoryId"
-                  },
-                  {
-                    "$ref": "#/components/schemas/title"
                   },
                   {
                     "$ref": "#/components/schemas/rhCode"
@@ -306,9 +302,6 @@
                 "anyOf": [
                   {
                     "$ref": "#/components/schemas/categoryId"
-                  },
-                  {
-                    "$ref": "#/components/schemas/title"
                   },
                   {
                     "$ref": "#/components/schemas/description"
@@ -971,8 +964,7 @@
         "items": {
           "type": "object",
           "required": [
-            "id",
-            "title"
+            "id"
           ],
           "description": "summary data for a listing",
           "allOf": [
@@ -985,16 +977,16 @@
               }
             },
             {
-              "$ref": "#/components/schemas/title"
-            },
-            {
-              "$ref": "#/components/schemas/description"
-            },
-            {
               "$ref": "#/components/schemas/location"
             },
             {
+              "$ref": "#/components/schemas/regionCode"
+            },
+            {
               "$ref": "#/components/schemas/region"
+            },
+            {
+              "$ref": "#/components/schemas/description"
             },
             {
               "$ref": "#/components/schemas/reservePrice"
@@ -1024,9 +1016,6 @@
           },
           {
             "$ref": "#/components/schemas/categoryId"
-          },
-          {
-            "$ref": "#/components/schemas/title"
           },
           {
             "$ref": "#/components/schemas/rhCode"
@@ -1155,14 +1144,6 @@
           }
         }
       },
-      "title": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          }
-        }
-      },
       "rhCode": {
         "type": "object",
         "properties": {
@@ -1250,20 +1231,14 @@
         "title": "listing",
         "type": "object",
         "properties": {
-          "title": {
-            "type": "string"
-          },
-          "rhCode": {
-            "type": "string"
-          },
           "location": {
             "type": "string"
           },
           "regionCode": {
             "type": "integer"
           },
-          "categoryId": {
-            "type": "integer"
+          "region": {
+            "type": "string"
           },
           "description": {
             "type": "string"
@@ -1271,12 +1246,6 @@
           "reservePrice": {
             "type": "integer",
             "minimum": 0
-          },
-          "listingExtras": {
-            "type": "string"
-          },
-          "listingConfig": {
-            "type": "string"
           }
         }
       },
@@ -1324,7 +1293,6 @@
           }
         ],
         "required": [
-          "title",
           "rhCode",
           "location",
           "regionCode",

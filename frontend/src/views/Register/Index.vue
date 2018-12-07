@@ -1,99 +1,57 @@
 <template>
-  <v-layout>
-    <v-card contextual-style="dark">
-      <span slot="header">
-        Register
-      </span>
-      <div slot="body">
-        <form @submit.prevent="register(user)">
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-user fa-fw"/>
-                </span>
+  <div class="father">
+    <v-layout class="son">
+      <div>
+        <el-card class="box-card" v-loading="loadingStatus">
+          <div slot="header" class="clearfix">
+            <span>Signup</span>
+            <router-link :to="{ name: 'home.index' }">
+              <el-button style="float: right; padding: 3px 0" type="text">Exit</el-button>
+            </router-link>
+          </div>
+          <div>
+            <el-form label-width="140px" ref="signupForm" :model="signupForm" :rules="signupRules" class="signup-form"
+                     auto-complete="on" label-position="left">
+              <el-form-item prop="firstName" label="First Name">
+                <el-input v-model="signupForm.firstName"></el-input>
+              </el-form-item>
+              <el-form-item prop="lastName" label="Last Name">
+                <el-input v-model="signupForm.lastName"></el-input>
+              </el-form-item>
+              <el-form-item prop="email" label="Email">
+                <el-input v-model="signupForm.email"></el-input>
+              </el-form-item>
+              <el-form-item prop="password" label="Password">
+                <el-input
+                  type="password"
+                  v-model="signupForm.password"
+                  name="password"
+                  auto-complete="on"/>
+              </el-form-item>
+              <el-form-item prop="passwordConfirm" label="Password Confirm">
+                <el-input
+                  type="password"
+                  v-model="signupForm.passwordConfirm"
+                  name="passwordConfirm"
+                  auto-complete="on"/>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="submitForm('signupForm')" :loading="signupClicked">Sign Up</el-button>
+                <el-button @click="resetForm('signupForm')">Reset</el-button>
+              </el-form-item>
+              <div>
+                Already have an account?
+                <router-link :to="{ name: 'login.index' }">
+                  <el-button style="padding: 3px 0" type="text">Log In</el-button>
+                </router-link>
               </div>
-              <input
-                v-model="user.firstName"
-                type="text"
-                placeholder="First name"
-                class="form-control"
-              >
-            </div>
+            </el-form>
           </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-user fa-fw"/>
-                </span>
-              </div>
-              <input
-                v-model="user.lastName"
-                type="text"
-                placeholder="Last name"
-                class="form-control"
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-envelope fa-fw"/>
-                </span>
-              </div>
-              <input
-                v-model="user.email"
-                type="email"
-                placeholder="Email"
-                class="form-control"
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-lock fa-fw"/>
-                </span>
-              </div>
-              <input
-                v-model="user.password"
-                type="password"
-                placeholder="Password"
-                class="form-control"
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-lock fa-fw"/>
-                </span>
-              </div>
-              <input
-                v-model="user.passwordConfirm"
-                type="password"
-                placeholder="Confirm password"
-                class="form-control"
-              >
-            </div>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-outline-primary">
-              Register
-            </button>
-          </div>
-        </form>
+
+        </el-card>
       </div>
-      <div slot="footer">
-        Already got an account?
-        <router-link :to="{ name: 'login.index' }">Login</router-link>
-      </div>
-    </v-card>
-  </v-layout>
+    </v-layout>
+  </div>
 </template>
 
 <script>
@@ -105,7 +63,6 @@
  */
 
 import VLayout from '@/layouts/Minimal.vue';
-import VContact from '@/components/Contact.vue';
 
 export default {
   /**
@@ -118,7 +75,6 @@ export default {
    */
   components: {
     VLayout,
-    VContact,
   },
 
   /**
@@ -127,13 +83,46 @@ export default {
    * @returns {Object} The view-model data.
    */
   data() {
+    let validatePass = (rule, value, callback) => {
+      if (value.length === 0) {
+        callback(new Error('Please input the password'));
+      } else if (value.length < 5) {
+        callback(new Error('The password length cannot be less than 5 bits'));
+      } else {
+        if (this.signupForm.passwordConfirm !== '') {
+          this.$refs.signupForm.validateField('passwordConfirm');
+        }
+        callback();
+      }
+    };
+    let validatePassConfirm = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Please input the password again'));
+      } else if (value !== this.signupForm.password) {
+        callback(new Error('Two inputs don\'t match!'));
+      } else {
+        callback();
+      }
+    };
     return {
-      user: {
-        firstName: null,
-        lastName: null,
-        email: null,
-        passwordConfirm: null,
-        password: null,
+      loadingStatus: false,
+      signupClicked: false,
+      signupForm: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        passwordConfirm: '',
+        password: '',
+      },
+      signupRules: {
+        email: [{required: true, message: 'Please input email address', trigger: 'blur'},
+          {type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change']}],
+        password: [{required: true, validator: validatePass, trigger: 'blur'}],
+        lastName: [{required: true, message: 'Please fill in the family name', trigger: 'blur'},
+          {type: 'string', max: 20, message: 'Name is no longer than 20 words', trigger: ['blur', 'change']}],
+        firstName: [{required: true, message: 'Please fill in the given name', trigger: 'blur'},
+          {type: 'string', max: 20, message: 'Name is no longer than 20 words', trigger: ['blur', 'change']}],
+        passwordConfirm: [{required: true, validator: validatePassConfirm, trigger: 'blur'}],
       },
     };
   },
@@ -147,9 +136,63 @@ export default {
      *
      * @param {Object} user The user to be registered.
      */
-    register(user) {
-      this.$store.dispatch('auth/register', user);
+    submitForm(formName) {
+      this.loadingStatus = true;
+      this.signupClicked = true;
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          let vm = this;
+          this.$http.post('users/',
+            {
+              "givenName": this.signupForm.firstName,
+              "familyName": this.signupForm.lastName,
+              "email": this.signupForm.email,
+              "password": this.signupForm.password
+            })
+            .then((response) => {
+              this.$message({
+                message: 'Successfully signup!',
+                type: 'success'
+              });
+              // this.bus.$on('listenOnSession', this.signupForm.email);
+              this.$router.push({path: '/admin'});
+            }, function (error) {
+              if (error.response.status === 400) {
+                vm.signupClicked = false;
+                vm.loadingStatus = false;
+                vm.$notify.error({
+                  title: 'Signup Failed',
+                  message: 'Invalid user detail supplied'
+                });
+              }
+            });
+        } else {
+          this.loadingStatus = false;
+          this.signupClicked = false;
+          return false;
+        }
+      });
     },
+
+    resetForm(formName) {
+      this.signupClicked = false;
+      this.loadingStatus = false;
+      this.$refs[formName].resetFields();
+    }
+
   },
 };
 </script>
+
+<style scoped>
+  .father {
+    position: relative;
+  }
+
+  .son {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 25%);
+  }
+</style>

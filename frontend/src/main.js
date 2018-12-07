@@ -59,8 +59,8 @@ Vue.use(BootstrapVue);
 Vue.use(ElementUI, {locale});
 
 Vue.config.productionTip = false;
-
-store.dispatch('auth/check');
+// Vue.prototype.bus = new Vue();
+// store.dispatch('auth/check');
 
 /* eslint-disable no-new */
 new Vue({

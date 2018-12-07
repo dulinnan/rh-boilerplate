@@ -60,14 +60,11 @@
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdown">
                 <router-link
-                  :to="{ name: 'listing.index' }"
+                  :to="{ name: 'listings.index' }"
                   class="dropdown-item"
                   exact
                 >Our Listings
                 </router-link>
-                <!--<a-->
-                <!--class="dropdown-item"-->
-                <!--href="#">Our Listings</a>-->
                 <a
                   class="dropdown-item"
                   href="#">Booking Conditions</a>
@@ -225,7 +222,11 @@
             <h5>Site Details</h5>
             <p>Terms and conditions</p>
             <p>Privacy statement</p>
-            <p>Trade Login</p>
+            <router-link :to="{name:'admin.index'}">
+              <!--<p>Trade Login</p>-->
+              <span class="footer-link-arrow">Trade Login</span>
+            </router-link>
+
 
           </div>
           <!-- Grid column -->
@@ -443,32 +444,32 @@ export default {
 
   .dropdown-item:hover, .dropdown-item:active {
     color: #FFFFFF !important;
-    background-color: #EE6123 !important;
+    background-color: #ff4c4c !important;
   }
 
   .dropdown > .dropdown-toggle:active {
     /*Without this, clicking will make it sticky*/
     pointer-events: none;
     color: #FFFFFF !important;
-    background-color: #EE6123 !important;
+    background-color: #ff4c4c !important;
   }
 
   .nav-link:active {
     color: #FFFFFF !important;
-    background-color: #EE6123 !important;
+    background-color: #ff4c4c !important;
   }
   b-link {
     color: #FFFFFF !important;
-    background-color: #EE6123 !important;
+    background-color: #ff4c4c !important;
   }
 
   .navbar-dark .navbar-nav .active>.nav-link {
     color: #fff;
-    background-color: #EE6123 !important;
+    background-color: #ff4c4c !important;
   }
 
   .nav-item:hover, .nav-item:active {
-    background: #EE6123 !important;
+    background: #ff4c4c !important;
     color: white !important;
   }
 

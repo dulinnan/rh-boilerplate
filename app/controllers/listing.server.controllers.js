@@ -23,9 +23,8 @@ exports.list = function (req, res) {
                     // console.log("results", results);
                     return res.sendStatus(400);
                 }
-
                 if (results.length == 0) {
-                    //console.log("empty");
+                    // console.log("empty");
                     return res.status(200).json(results);
                 } else {
                     if (!validator.isValidSchema(results, 'components.schemas.listingsOverview')) {
@@ -39,13 +38,13 @@ exports.list = function (req, res) {
             })
         })
         .catch(function (err) {
-            //console.log(err);
+            // console.log(err);
             res.sendStatus(400)
         })
 }
 
 /**
- * create a new listing, from a request body that follows the `Listing` schema definition
+ * create a new listing, from a request body that follows the `Listings` schema definition
  *
  * (must be authenticated)
  */
@@ -288,7 +287,7 @@ exports.update = function (req, res) {
     console.log('Update listing=', token);
     users.getIdFromToken(token, function (err, _id) {
 
-        if (!validator.isValidSchema(req.body, 'components.schemas.Listing')) {
+        if (!validator.isValidSchema(req.body, 'components.schemas.Listings')) {
             log.warn(`users.controller.update: bad listing ${JSON.stringify(req.body)}`);
             return res.sendStatus(400);
         }

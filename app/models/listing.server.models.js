@@ -7,22 +7,19 @@ const dateFormat = require('dateformat');
  *
  */
 const getAll = function (searchParams, done) {
-    let sql = `SELECT listing.listing_id AS id, category.category_title AS categoryTitle, category.category_id AS categoryId, ` +
-        `listing.listing_title AS title, listing.listing_reserveprice AS reservePrice, listing.listing_startingdate AS startDateTime, ` +
-        `listing.listing_endingdate AS endDateTime, bid.bid_amount AS currentBid, listing.listing_startingprice AS startingPrice ` +
-        `FROM listing JOIN category ON listing.listing_categoryid = category.category_id LEFT OUTER JOIN bid ON bid.bid_listingid = listing.listing_id ` +
-        `WHERE (bid.bid_amount IN (SELECT MAX(bid_amount) FROM bid JOIN listing ON bid.bid_listingid = listing.listing_id GROUP BY listing.listing_id) OR bid.bid_amount IS NULL)`;
+    let sql = `SELECT listing.listing_id AS id, listing.listing_location AS location, region.region_id AS regionCode, ` +
+        `region.region_title AS region, listing.listing_description AS description, listing.listing_reserveprice AS reservePrice ` +
+        ` FROM listing JOIN category ON listing.listing_categoryid = category.category_id ` +
+        ` LEFT OUTER JOIN region ON region.region_id = listing.listing_regionid ` +
+        ` WHERE listing.listing_creationdate >= CURRENT_TIMESTAMP() `;
     if (searchParams['q']) {
-        sql += ` AND listing.listing_title LIKE '%${searchParams['q']}%'`
+        sql += ` AND listing.listing_location LIKE '%${searchParams['q']}%'`
     }
     if (searchParams['category-id']) {
         sql += ` AND category.category_id = ${searchParams['category-id']}`;
     }
-    if (searchParams['seller']) {
-        sql += ` AND listing.listing_userid = ${searchParams['seller']}`;
-    }
-    if (searchParams['bidder']) {
-        sql += ` AND listing.listing_id IN (SELECT bid_listingid FROM bid WHERE bid_userid =${searchParams['bidder']})`;
+    if (searchParams['host']) {
+        sql += ` AND listing.listing_contactid = ${searchParams['host']}`;
     }
     let status = searchParams["status"];
     if (status && status !== "" && status !== "all") {
@@ -39,7 +36,7 @@ const getAll = function (searchParams, done) {
             sql += ` AND listing.listing_endingdate <= CURRENT_TIMESTAMP() AND bid.bid_amount >= listing.listing_reserveprice`;
         }
     }
-    sql += ` ORDER BY endDateTime ASC, id ASC`;
+    sql += ` ORDER BY regionCode ASC, id ASC `;
     if (searchParams['count']) {
         sql += ` LIMIT ${searchParams['count']}`;
     }
@@ -54,14 +51,14 @@ const getAll = function (searchParams, done) {
         if (err) return done(err, false);
         for (i = 0; i < results.length; i++) {
 
-            if (results[i].currentBid == null) {
-                results[i].currentBid = 0;
+            if (results[i].reservePrice == null) {
+                results[i].reservePrice = 0;
             }
-
-            delete results[i].startingPrice;
-
-            results[i].startDateTime = Date.parse(results[i].startDateTime);
-            results[i].endDateTime = Date.parse(results[i].endDateTime);
+            //
+            // delete results[i].startingPrice;
+            //
+            // results[i].startDateTime = Date.parse(results[i].startDateTime);
+            // results[i].endDateTime = Date.parse(results[i].endDateTime);
         }
         return done(false, results);
     });

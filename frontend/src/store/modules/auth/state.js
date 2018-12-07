@@ -6,5 +6,10 @@
  */
 
 export default {
+  state: {
+    currentUser: null,
+    isLogin: false,
+    token: ""
+  },
   authenticated: false,
 };

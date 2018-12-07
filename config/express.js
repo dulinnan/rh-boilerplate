@@ -8,9 +8,14 @@ module.exports = function () {
     app.use(bodyParser());
 
     app.use(function (req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
+        // res.header("Access-Control-Allow-Origin", "*");
+        // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Authorization");
+        // res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header("Access-Control-Allow-Credentials", "true");
+        res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,PATCH");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Authorization");
-        res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
         next();
     });
 

@@ -42,28 +42,28 @@ CREATE TABLE region (
   UNIQUE KEY region_id (region_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-CREATE TABLE listing (
-  listing_id int(10) NOT NULL AUTO_INCREMENT,
-  listing_categoryid int(10) NOT NULL,
-  listing_rhcode varchar(5) NOT NULL,
-  listing_location varchar(128) NOT NULL,
-  listing_regionid int(10) NOT NULL,
-  listing_description varchar(512) DEFAULT NULL,
-  listing_config varchar(512) DEFAULT NULL,
-  listing_extras varchar(512) DEFAULT NULL,
-  listing_reserveprice int(10) DEFAULT NULL,
-  listing_contactid int(10) unsigned DEFAULT NULL,
-  listing_primaryphoto_URI varchar(128) DEFAULT NULL,
-  listing_deactivated tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (listing_id),
-  KEY fk_listing_category_id (listing_categoryid),
-  KEY fk_listing_contact_id (listing_contactid),
-  KEY fk_listing_region_id (listing_regionid),
-  CONSTRAINT fk_listing_contact_id FOREIGN KEY (listing_contactid) REFERENCES contacts (contact_id),
-  CONSTRAINT fk_listing_category_id FOREIGN KEY (listing_categoryid) REFERENCES category (category_id),
-  CONSTRAINT fk_listing_region_id FOREIGN KEY (listing_regionid) REFERENCES region (region_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `listing` (
+  `listing_id` int(10) NOT NULL AUTO_INCREMENT,
+  `listing_categoryid` int(10) NOT NULL,
+  `listing_rhcode` varchar(5) NOT NULL,
+  `listing_location` varchar(128) NOT NULL,
+  `listing_regionid` int(10) NOT NULL,
+  `listing_description` varchar(512) DEFAULT NULL,
+  `listing_config` varchar(512) DEFAULT NULL,
+  `listing_extras` varchar(512) DEFAULT NULL,
+  `listing_reserveprice` int(10) DEFAULT NULL,
+  `listing_contactid` int(10) unsigned DEFAULT NULL,
+  `listing_primaryphoto_URI` varchar(128) DEFAULT NULL,
+  `listing_deactivated` tinyint(1) DEFAULT NULL,
+  `listing_creationdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`listing_id`),
+  KEY `fk_listing_category_id` (`listing_categoryid`),
+  KEY `fk_listing_contact_id` (`listing_contactid`),
+  KEY `fk_listing_region_id` (`listing_regionid`),
+  CONSTRAINT `fk_listing_category_id` FOREIGN KEY (`listing_categoryid`) REFERENCES `category` (`category_id`),
+  CONSTRAINT `fk_listing_contact_id` FOREIGN KEY (`listing_contactid`) REFERENCES `contacts` (`contact_id`),
+  CONSTRAINT `fk_listing_region_id` FOREIGN KEY (`listing_regionid`) REFERENCES `region` (`region_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=729 DEFAULT CHARSET=latin1;
 
 CREATE TABLE photo (
   photo_id int(10) NOT NULL AUTO_INCREMENT,

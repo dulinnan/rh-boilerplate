@@ -58,6 +58,7 @@ export const login = ({ commit }) => {
   });
 };
 
+
 export const logout = ({ commit }) => {
   commit(types.LOGOUT);
   Vue.router.push({
@@ -65,9 +66,14 @@ export const logout = ({ commit }) => {
   });
 };
 
+export const setUser = ({commit}, user) => {
+  commit("userStatus", user);
+};
+
 export default {
-  check,
-  register,
-  login,
-  logout,
+  // check,
+  // register,
+  // login,
+  // logout,
+  // setUser
 };

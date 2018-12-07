@@ -61,7 +61,7 @@ const authenticate = function (email, password, done) {
                 if (results[0].user_password === getHash(password, salt)) {
                     return done(false, results[0].user_id);
                 } else {
-                    console.log("failed passwd check");
+                    console.log("failed password check");
                     return done(true); // failed password check
                 }
 
@@ -143,11 +143,12 @@ const getIdFromToken = function (token, done) {
         return done(true, null);
     else {
         db.get_pool().query(
-            'SELECT user_id FROM admin_user WHERE user_token=?',
+            // 'SELECT user_id FROM admin_user WHERE user_token=?',
+            'SELECT admin_user.user_id, permission_user.permission_id FROM admin_user JOIN permission_user ON admin_user.user_id=permission_user.user_id WHERE admin_user.user_token=?',
             [token],
             function (err, result) {
                 if (result.length === 1)
-                    return done(null, result[0].user_id);
+                    return done(null, result[0]);
                 return done(err, null);
             }
         )

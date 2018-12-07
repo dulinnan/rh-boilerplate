@@ -374,7 +374,7 @@
   @media only screen and (min-width: 540px) and (max-width: 1024px) {
     .hero-slides-content {
       background-color: rgba(0, 0, 0, 0.4);
-      border: 2px solid #EE6123;
+      border: 2px solid #ff4c4c;
       padding: 40px 30px;
       margin-bottom: 2rem;
     }
@@ -403,7 +403,7 @@
   @media only screen and (min-width: 1024px) {
     .hero-slides-content {
       background-color: rgba(0, 0, 0, 0.4);
-      border: 2px solid #EE6123;
+      border: 2px solid #ff4c4c;
       padding: 40px 30px;
       margin-bottom: 6rem;
     }
@@ -449,7 +449,7 @@
       margin-bottom: 1rem;
       display: inline-block;
       background-color: rgba(0, 0, 0, 0.4);
-      border: 2px solid #EE6123;
+      border: 2px solid #ff4c4c;
       padding: 1rem;
     }
 
@@ -458,7 +458,7 @@
   .hero-slides-content .line {
     width: 90px;
     height: 2px;
-    background-color: #EE6123;
+    background-color: #ff4c4c;
     margin: 0 auto 30px;
   }
 

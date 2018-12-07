@@ -6,4 +6,11 @@
  * auth module.
  */
 
-export default {};
+
+export const currentUser = state => state.state.currentUser;
+export const isLogin = state => state.state.isLogin;
+
+export default {
+  currentUser,
+  isLogin
+};
