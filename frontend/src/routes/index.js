@@ -16,6 +16,9 @@ export default [
     // meta: {
     //   auth: true,
     // },
+    meta: {
+      keepAlive: true
+    }
   },
 
   // Account
@@ -39,6 +42,7 @@ export default [
     // If the user needs to be a guest to view this page.
     meta: {
       guest: true,
+      keepAlive: false
     },
   },
 
@@ -51,6 +55,7 @@ export default [
     // If the user needs to be a guest to view this page.
     meta: {
       guest: true,
+      keepAlive: false
     },
   },
 
@@ -59,6 +64,9 @@ export default [
     path: '/contact',
     name: 'contact.index',
     component: () => import('@/views/Contact/Index.vue'),
+    meta: {
+      keepAlive: true
+    }
   },
 
   // About Us
@@ -66,6 +74,9 @@ export default [
     path: '/about-us',
     name: 'aboutus.index',
     component: () => import('@/views/AboutUs/Index.vue'),
+    meta: {
+      keepAlive: true
+    }
   },
 
   // Booking
@@ -73,6 +84,9 @@ export default [
     path: '/booking',
     name: 'booking.index',
     component: () => import('@/views/Booking/Index.vue'),
+    meta: {
+      keepAlive: false
+    }
   },
 
   // Listings
@@ -80,6 +94,9 @@ export default [
     path: '/listings',
     name: 'listings.index',
     component: () => import('@/views/Listings/Index.vue'),
+    meta: {
+      keepAlive: false
+    }
   },
 
   // Listing
@@ -87,13 +104,19 @@ export default [
     path: '/listings/:listingId',
     name: 'listing.index',
     component: () => import('@/views/Listing/Index.vue'),
+    meta: {
+      keepAlive: false
+    }
   },
 
   // Mapping
   {
-    path: '/map',
+    path: '/browse',
     name: 'map.index',
     component: () => import('@/views/Map/Index.vue'),
+    meta: {
+      keepAlive: false
+    }
   },
 
   // Admin
@@ -101,10 +124,10 @@ export default [
     path: '/admin',
     name: 'admin.index',
     component: () => import('@/views/Admin/Index.vue'),
-
     // If the user needs to be a guest to view this page.
     meta: {
       auth: true,
+      keepAlive: true
     },
   },
 

@@ -60,7 +60,7 @@
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdown">
                 <router-link
-                  :to="{ name: 'listings.index' }"
+                  :to="{ name: 'map.index' }"
                   class="dropdown-item"
                   exact
                 >Our Listings

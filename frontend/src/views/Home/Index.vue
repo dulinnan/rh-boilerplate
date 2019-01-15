@@ -212,26 +212,6 @@
         </section>
         <!--Curated list area ends-->
 
-        <!--Video group area-->
-        <!--<div class="video-group">-->
-        <!--<div class="container container&#45;&#45;md text">-->
-        <!--<div class="row">-->
-        <!--<div class="col-xs-9 col-md-7">-->
-        <!--<div class="embed-responsive embed-responsive-16by9">-->
-        <!--<iframe src="//player.vimeo.com/video/293373689"></iframe>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-xs-3 col-md-5">-->
-        <!--<h1>{{videoPara.title}}</h1>-->
-        <!--<p>{{videoPara.body}}</p>-->
-        <!--<button type="button" class="btn-blue">Booking Request</button>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--Video group area ends-->
-
-
       </div>
       <v-contact/>
     </v-layout>

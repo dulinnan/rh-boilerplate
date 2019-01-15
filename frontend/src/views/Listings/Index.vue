@@ -3,7 +3,7 @@
     <v-layout>
       <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center">
         <div class="bradcumbContent">
-          <h2>DEMO</h2>
+          <h2>{{regionName}}</h2>
         </div>
       </section>
 
@@ -60,6 +60,7 @@
 <script>
   import VLayout from '@/layouts/Default.vue';
   import VContact from '@/components/Contact.vue';
+  // import {AxiosInstance as axios} from "axios";
 
   export default {
     name: 'ListingsIndex',
@@ -72,6 +73,7 @@
     },
     data() {
       return {
+        regionName: 'Upcoming',
         featuredLocations: [],
         picDemo: require('../../assets/featuredLocation/rotorua.jpeg'),
       };
@@ -81,9 +83,11 @@
         window.scrollTo(0, 0);
       },
       getListings: function () {
-        this.$http.get('listings')
+        // this.featuredLocations = [];
+        this.$http.get('listings', {params: {'region-id': this.$route.query['region']}})
           .then(response => {
             this.featuredLocations = response.data;
+            this.regionName = this.featuredLocations[0]['region'];
           }).catch(error => {
           console.log(error);
         });
@@ -91,8 +95,8 @@
 
     },
     mounted() {
-      this.scrollBehavior();
       this.getListings();
+      // this.scrollBehavior();
     }
   };
 </script>

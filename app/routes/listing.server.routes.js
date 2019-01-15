@@ -20,6 +20,9 @@ module.exports = function (app) {
     app.route('/api/v1/categories')
         .get(listing.get_categories);
 
+    app.route('/api/v1/regions')
+        .get(listing.get_regions);
+
     app.route('/api/v1/listings/:id/photos')
         .get(listing.list_photos)
         .post(auth.isAuthenticated, listing.add_photo)

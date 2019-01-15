@@ -11,12 +11,15 @@ const getAll = function (searchParams, done) {
         `region.region_title AS region, listing.listing_description AS description, listing.listing_reserveprice AS reservePrice ` +
         ` FROM listing JOIN category ON listing.listing_categoryid = category.category_id ` +
         ` LEFT OUTER JOIN region ON region.region_id = listing.listing_regionid ` +
-        ` WHERE listing.listing_creationdate >= CURRENT_TIMESTAMP() `;
+        ` WHERE listing.listing_creationdate <= CURRENT_TIMESTAMP() `;
     if (searchParams['q']) {
         sql += ` AND listing.listing_location LIKE '%${searchParams['q']}%'`
     }
     if (searchParams['category-id']) {
         sql += ` AND category.category_id = ${searchParams['category-id']}`;
+    }
+    if (searchParams['region-id']) {
+        sql += ` AND region.region_id = ${searchParams['region-id']}`;
     }
     if (searchParams['host']) {
         sql += ` AND listing.listing_contactid = ${searchParams['host']}`;
@@ -226,6 +229,24 @@ const get_categories = function (done) {
     );
 };
 
+
+/**
+ * Get all regions
+ */
+const get_regions = function (done) {
+    db.get_pool().query(
+        'SELECT * FROM region',
+        function (err, results) {
+            if (err) {
+                return done(err, false);
+            } else {
+                return done(false, results)
+            }
+        }
+    );
+};
+
+
 /**
  Get won listings
  */
@@ -281,5 +302,6 @@ module.exports = {
     getOne: get_one,
     alter: alter,
     getCategories: get_categories,
+    getRegions: get_regions,
     getWonListings: get_won_listings
 }

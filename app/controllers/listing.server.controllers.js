@@ -581,6 +581,21 @@ exports.get_categories = function (req, res) {
 }
 
 /**
+ Get all regions
+ */
+exports.get_regions = function (req, res) {
+    console.log("getting regions...");
+    listings.getRegions(function (err, results) {
+        if (err) {
+            log.warn(`listings.controller.get_regions: model returned error: ${err}`);
+            return res.sendStatus(500);
+        } else {
+            return res.status(200).json(results);
+        }
+    });
+}
+
+/**
  Get listings that the logged in user has won
  */
 exports.get_won_listings = function (req, res) {
